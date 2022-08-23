@@ -1,0 +1,77 @@
+PODS:
+  - Au10tixCore (3.6.0)
+  - Au10tixDetectorManager (3.6.0):
+    - Au10tixCore
+  - Au10tixPassiveFaceLivenessKit (3.6.0):
+    - Au10tixCore
+    - Au10tixDetectorManager
+    - Au10tixSourceManager
+  - Au10tixSmartDocumentCaptureKit (3.6.0):
+    - Au10tixCore
+    - Au10tixDetectorManager
+    - Au10tixSourceManager
+  - Au10tixSourceManager (3.6.0):
+    - Au10tixCore
+  - Flutter (1.0.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.0.4):
+    - Flutter
+  - sdk_core_flutter (0.0.1):
+    - Au10tixCore (= 3.6.0)
+    - Flutter
+  - sdk_pfl_flutter (0.0.1):
+    - Au10tixPassiveFaceLivenessKit (= 3.6.0)
+    - Flutter
+    - sdk_core_flutter
+  - sdk_sdc_flutter (0.0.1):
+    - Au10tixSmartDocumentCaptureKit (= 3.6.0)
+    - Flutter
+    - sdk_core_flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - sdk_core_flutter (from `.symlinks/plugins/sdk_core_flutter/ios`)
+  - sdk_pfl_flutter (from `.symlinks/plugins/sdk_pfl_flutter/ios`)
+  - sdk_sdc_flutter (from `.symlinks/plugins/sdk_sdc_flutter/ios`)
+
+SPEC REPOS:
+  https://github.com/Au10tixOrg/iOS_Artifacts_cocoapods_spec.git:
+    - Au10tixCore
+    - Au10tixDetectorManager
+    - Au10tixPassiveFaceLivenessKit
+    - Au10tixSmartDocumentCaptureKit
+    - Au10tixSourceManager
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  sdk_core_flutter:
+    :path: ".symlinks/plugins/sdk_core_flutter/ios"
+  sdk_pfl_flutter:
+    :path: ".symlinks/plugins/sdk_pfl_flutter/ios"
+  sdk_sdc_flutter:
+    :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
+
+SPEC CHECKSUMS:
+  Au10tixCore: 72b3f523322f08fe492400f09829b3c04a32caf2
+  Au10tixDetectorManager: 19f6314be15b9bb1b12996c0943da325bb350ae8
+  Au10tixPassiveFaceLivenessKit: be6b753233701366afafae1f8f8e5d14ccf9cad7
+  Au10tixSmartDocumentCaptureKit: 0975b639112ae5a2e358382a29cfdadccc731f5b
+  Au10tixSourceManager: 0d29ebe6d920501ac41a96ff6d9f38339c78ab28
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  sdk_core_flutter: 6da40817048cde03ff24e98bb206c694de310ef6
+  sdk_pfl_flutter: 6aee336969ec5555ddbaf82bea41f1ff4bad7d71
+  sdk_sdc_flutter: d92888a8a71171409bf7c02da5adaca135302f8b
+
+PODFILE CHECKSUM: b3413660916e94cb36a8a76c5d0fe2a06a7592df
+
+COCOAPODS: 1.11.2
