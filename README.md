@@ -48,7 +48,7 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
 
 1. Create a new Flutter project.
 1. Open the `pubspec.yaml` file.
-1. Add the AU10TIX plugin dependencies as follows:
+1. Add the AU10TIX plugin dependencies from pub.dev as follows:
 
     ```yaml
     dependencies:
@@ -57,7 +57,9 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
       sdk_sdc_flutter: ^1.0.0
       sdk_pfl_flutter: ^1.0.0
     ```
-
+    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
+    
+    PFL - <https://pub.dev/packages/sdk_pfl_flutter>
 1. Android:
 
     1. In the `android` folder, open the `local.properties` file.
