@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_au10tix_sample">
+    <uses-permission android:name="android.permission.CAMERA" />
    <application
         android:label="flutter_au10tix_sample"
         android:name="${applicationName}"

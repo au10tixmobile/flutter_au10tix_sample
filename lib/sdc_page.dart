@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,13 +16,6 @@ class SDCPage extends StatefulWidget {
 
 class _SDCPageState extends State<SDCPage> {
   Map? _hasResult;
-  String featureType = 'sdc';
-
-  @override
-  void dispose() {
-    super.dispose();
-    SdkSdcFlutter.stopSession();
-  }
 
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
