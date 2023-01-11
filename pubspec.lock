@@ -232,21 +232,21 @@ packages:
       name: sdk_core_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   sdk_pfl_flutter:
     dependency: "direct main"
     description:
       name: sdk_pfl_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   sdk_sdc_flutter:
     dependency: "direct main"
     description:
       name: sdk_sdc_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   sky_engine:
     dependency: transitive
     description: flutter

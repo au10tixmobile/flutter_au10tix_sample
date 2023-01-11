@@ -1,16 +1,24 @@
 PODS:
-  - Au10tixCore (3.6.0)
-  - Au10tixDetectorManager (3.6.0):
+  - Au10tixBaseUI (3.9.0):
     - Au10tixCore
-  - Au10tixPassiveFaceLivenessKit (3.6.0):
+  - Au10tixCore (3.9.0)
+  - Au10tixDetectorManager (3.9.0):
     - Au10tixCore
-    - Au10tixDetectorManager
-    - Au10tixSourceManager
-  - Au10tixSmartDocumentCaptureKit (3.6.0):
+  - Au10tixPassiveFaceLivenessKit (3.9.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixSourceManager (3.6.0):
+  - Au10tixPassiveFaceLivenessUI (3.9.0):
+    - Au10tixBaseUI
+    - Au10tixPassiveFaceLivenessKit
+  - Au10tixSmartDocumentCaptureKit (3.9.0):
+    - Au10tixCore
+    - Au10tixDetectorManager
+    - Au10tixSourceManager
+  - Au10tixSmartDocumentCaptureUI (3.9.0):
+    - Au10tixBaseUI
+    - Au10tixSmartDocumentCaptureKit
+  - Au10tixSourceManager (3.9.0):
     - Au10tixCore
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
@@ -18,14 +26,19 @@ PODS:
   - permission_handler_apple (9.0.4):
     - Flutter
   - sdk_core_flutter (0.0.1):
-    - Au10tixCore (= 3.6.0)
+    - Au10tixBaseUI (= 3.9.0)
+    - Au10tixCore (= 3.9.0)
+    - Au10tixDetectorManager (= 3.9.0)
+    - Au10tixSourceManager (= 3.9.0)
     - Flutter
   - sdk_pfl_flutter (0.0.1):
-    - Au10tixPassiveFaceLivenessKit (= 3.6.0)
+    - Au10tixPassiveFaceLivenessKit (= 3.9.0)
+    - Au10tixPassiveFaceLivenessUI (= 3.9.0)
     - Flutter
     - sdk_core_flutter
   - sdk_sdc_flutter (0.0.1):
-    - Au10tixSmartDocumentCaptureKit (= 3.6.0)
+    - Au10tixSmartDocumentCaptureKit (= 3.9.0)
+    - Au10tixSmartDocumentCaptureUI (= 3.9.0)
     - Flutter
     - sdk_core_flutter
 
@@ -38,11 +51,14 @@ DEPENDENCIES:
   - sdk_sdc_flutter (from `.symlinks/plugins/sdk_sdc_flutter/ios`)
 
 SPEC REPOS:
-  https://github.com/Au10tixOrg/iOS_Artifacts_cocoapods_spec.git:
+  https://github.com/au10tixmobile/iOS_Artifacts_cocoapods_spec.git:
+    - Au10tixBaseUI
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixPassiveFaceLivenessKit
+    - Au10tixPassiveFaceLivenessUI
     - Au10tixSmartDocumentCaptureKit
+    - Au10tixSmartDocumentCaptureUI
     - Au10tixSourceManager
 
 EXTERNAL SOURCES:
@@ -60,18 +76,21 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
 
 SPEC CHECKSUMS:
-  Au10tixCore: 72b3f523322f08fe492400f09829b3c04a32caf2
-  Au10tixDetectorManager: 19f6314be15b9bb1b12996c0943da325bb350ae8
-  Au10tixPassiveFaceLivenessKit: be6b753233701366afafae1f8f8e5d14ccf9cad7
-  Au10tixSmartDocumentCaptureKit: 0975b639112ae5a2e358382a29cfdadccc731f5b
-  Au10tixSourceManager: 0d29ebe6d920501ac41a96ff6d9f38339c78ab28
+  Au10tixBaseUI: fd76b3bb8f208c2bc40d200d10d77045495f4ad6
+  Au10tixCore: 993aa4404ecf3b34269b040819bab8313389b93b
+  Au10tixDetectorManager: c5c7e851ab4097a2b80999ebe6faf92f71495ec1
+  Au10tixPassiveFaceLivenessKit: 7efc273f587981be8cbf8a55dc91f6c7ee72016b
+  Au10tixPassiveFaceLivenessUI: a9384bbc14bdbe7a5c685162e48ee7742ad0ffa3
+  Au10tixSmartDocumentCaptureKit: 4a02fefe75e3ae3f1779e6ff39fcfffc6b59fab7
+  Au10tixSmartDocumentCaptureUI: 261088006aabc7d92cc7f302f4ebfecc8336f09d
+  Au10tixSourceManager: 193da8f4d88f83a8822cab2949cd12d7120b8fea
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
-  sdk_core_flutter: 6da40817048cde03ff24e98bb206c694de310ef6
-  sdk_pfl_flutter: 6aee336969ec5555ddbaf82bea41f1ff4bad7d71
-  sdk_sdc_flutter: d92888a8a71171409bf7c02da5adaca135302f8b
+  sdk_core_flutter: 4d3dcb31b0b737bdd86c64b60587cf7d74740c87
+  sdk_pfl_flutter: bc84aad141f0875e9625a505a503bd707af04dfb
+  sdk_sdc_flutter: 12f02fb83f26fc3532334b2f716c0213bce00638
 
-PODFILE CHECKSUM: b3413660916e94cb36a8a76c5d0fe2a06a7592df
+PODFILE CHECKSUM: 8f7363fb8243a2ae318e66a6dac02af26dcde14f
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

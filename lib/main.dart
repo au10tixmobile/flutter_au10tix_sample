@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
+import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
 import './pfl_page.dart';
 import './sdc_page.dart';
 
@@ -59,6 +60,19 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  Future<void> _startPFLUI() async {
+    try {
+      final result = await SdkPflFlutter.startPFLUI();
+      if (kDebugMode) {
+        print(result.toString());
+      }
+    } on PlatformException catch (error) {
+      if (kDebugMode) {
+        print(error.message);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +100,10 @@ class HomePage extends StatelessWidget {
               onPressed: () =>
                   Navigator.of(context).pushNamed(PFLPage.routeName),
               child: const Text("Start PFL"),
+            ),
+            ElevatedButton(
+              onPressed: () => _startPFLUI(),
+              child: const Text("Start PFL UI"),
             ),
           ],
         ),

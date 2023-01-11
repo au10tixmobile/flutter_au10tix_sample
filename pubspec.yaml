@@ -29,8 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sdk_sdc_flutter: ^1.1.0
-  sdk_pfl_flutter: ^1.1.0
+  sdk_sdc_flutter: ^1.1.1
+  sdk_pfl_flutter: ^1.1.1
   permission_handler: ^10.2.0
 
   # The following adds the Cupertino Icons font to your application.
