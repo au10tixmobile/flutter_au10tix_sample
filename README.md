@@ -4,22 +4,24 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 ## Table of Contents
 
-* [Compatibility](#compatibility)
-  * [AU10TIX SDK](#au10tix-sdk)
-  * [Flutter SDK](#flutter-sdk)
-* [Project Setup](#setup)
-  * [Prerequisite](#prerequisite)
-    * [AU10TIX SDK Setup](#au10tix-sdk-setup)
-      * [Android](#android)
-      * [iOS](#ios)
-    * [Permissions](#permissions)
-  * [Usage](#usage)
-    * [Preparing The SDK](#change-log)
-    * [Smart Document Capture (SDC)](#smart-document-capture-sdc)
-    * [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
-      * [PFL Status Codes](#pfl-status-codes)
-* [Support](#support)
-    * [Contact](#contact)
+- [flutter\_au10tix\_sample](#flutter_au10tix_sample)
+  - [Table of Contents](#table-of-contents)
+  - [Compatibility](#compatibility)
+    - [AU10TIX SDK](#au10tix-sdk)
+    - [Flutter SDK](#flutter-sdk)
+  - [Project Setup](#project-setup)
+    - [Prerequisite](#prerequisite)
+    - [AU10TIX SDK Setup](#au10tix-sdk-setup)
+    - [Permissions](#permissions)
+  - [Usage](#usage)
+    - [Preparing the SDK](#preparing-the-sdk)
+    - [Custom UI Implementation](#custom-ui-implementation)
+      - [Smart Document Capture (SDC)](#smart-document-capture-sdc)
+      - [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
+      - [PFL Status Codes](#pfl-status-codes)
+    - [UI Component Implementation](#ui-component-implementation)
+  - [Support](#support)
+    - [Contact](#contact)
 
 ## Compatibility
 
@@ -28,7 +30,7 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 The plugin is compatible with the following native AU10TIX SDK versions:
 
 * Android: 2.7.3
-* iOS: 3.6.0
+* iOS: 3.9.0
 
 ### Flutter SDK
 
@@ -47,23 +49,23 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
 ### AU10TIX SDK Setup
 
 1. Create a new Flutter project.
-1. Open the `pubspec.yaml` file.
-1. Add the AU10TIX plugin dependencies from pub.dev as follows:
+2. Open the `pubspec.yaml` file.
+3. Add the AU10TIX plugin dependencies from pub.dev as follows:
 
     ```yaml
     dependencies:
       flutter:
         sdk: flutter
-      sdk_sdc_flutter: ^1.0.0
-      sdk_pfl_flutter: ^1.0.0
+      sdk_sdc_flutter: ^1.1.2
+      sdk_pfl_flutter: ^1.1.2
     ```
     SDC - <https://pub.dev/packages/sdk_sdc_flutter>
     
     PFL - <https://pub.dev/packages/sdk_pfl_flutter>
-1. Android:
+4. Android:
 
     1. In the `android` folder, open the `local.properties` file.
-    1. Add the following:
+    2. Add the following:
 
         ```js
         key=<your_au10tix_pat>
@@ -71,25 +73,25 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
 
        The AU10TIX Android SDK will use your PAT to implement the dependencies.
 
-1. iOS:
+5. iOS:
 
     1. In the `iOS` folder, open the `podfile`.
-    1. Make sure you set the `platform` as follows:
+    2. Make sure you set the `platform` as follows:
 
         ```json
         platform :ios, '13.0'
         ```
 
-    1. Find the following line `flutter_ios_podfile_setup` and paste the following:
+    3. Find the following line `flutter_ios_podfile_setup` and paste the following:
 
         ```json
         flutter_ios_podfile_setup
         source 'https://github.com/CocoaPods/Specs.git'
-        source 'https://github.com/Au10tixOrg/iOS_Artifacts_cocoapods_spec.git'
+        source 'https://github.com/au10tixmobile/iOS_Artifacts_cocoapods_spec.git'
         ```
 
-    1. Save and run `pod install` in the terminal.
-1. Run `flutter pub get`.
+    4. Save and run `pod install` in the terminal.
+6. Run `flutter pub get`.
 
 ### Permissions
 
@@ -126,7 +128,9 @@ Follow the guide in the plugin to add the permissions above.
     result['init']
     ```
 
-### Smart Document Capture (SDC)
+### Custom UI Implementation
+
+#### Smart Document Capture (SDC)
 
 Now that the session is ready, we can start the SDC feature:
 
@@ -227,7 +231,7 @@ Now that the session is ready, we can start the SDC feature:
 
     This method uses the Flutter `image_picker` plugin to show the gallery. Once an image is selected, it is processed and a result is returned.
 
-### Passive Face Liveness (PFL)
+#### Passive Face Liveness (PFL)
 
 Like the SDC, make sure that the session is first prepared before using this plugin. To best understand this section make sure to first read the SDC section above.
 
@@ -338,7 +342,22 @@ static const int ERROR_LICENSE_ERROR = 328;
 static const int ERROR_INVALID_META = 329;
 static const int ERROR_UNKNOWN = 330;
 ```
+### UI Component Implementation
+To start the UI components for SDC and PFL add the following code:
+```dart
+//PFL
+final result = await SdkPflFlutter.startPFLUI();
 
+//SDC
+final result = await SdkPflFlutter.startSDCUI();
+```
+The result will arrive after the user clicks approve.
+```dart
+    final status = result['sdc'/'pfl']['status']
+    final imagePath = result['sdc'/'pfl']['imagePath']
+    final croppedImagePath = result['sdc'/'pfl']['croppedFilePath']
+```
+See the sample app for a clean implementation.
 ## Support
 
 ### Contact
