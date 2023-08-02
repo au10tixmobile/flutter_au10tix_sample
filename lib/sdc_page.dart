@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:io' show File;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sdk_core_flutter/camera_view.dart';
@@ -16,7 +17,6 @@ class SDCPage extends StatefulWidget {
 
 class _SDCPageState extends State<SDCPage> {
   Map? _hasResult;
-
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
     final result = await SdkSdcFlutter.onCaptureClicked();
@@ -47,18 +47,22 @@ class _SDCPageState extends State<SDCPage> {
     if (await Permission.camera.request().isGranted) {
       try {
         final result = await SdkSdcFlutter.startSDC();
+        if (kDebugMode) {
+          print(result.toString());
+        }
         setState(() {
           _hasResult = result;
         });
       } on PlatformException catch (error) {
-        print(error.message);
+        if (kDebugMode) {
+          print(error.message);
+        }
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("hasResult = ${_hasResult?['sdc']['status']}");
     return Scaffold(
       appBar: AppBar(
         title: const Text('SDC Page'),
@@ -70,7 +74,8 @@ class _SDCPageState extends State<SDCPage> {
               _hasResult == null
                   ? Au10tixCameraView(
                       featureHandlerFn: _startSDC,
-                      viewType: "au10tixCameraViewSDC")
+                      viewType: "au10tixCameraViewSDC",
+                    )
                   : Image.file(
                       File(_hasResult!['sdc']['imagePath']),
                       width: MediaQuery.of(context).size.width,
