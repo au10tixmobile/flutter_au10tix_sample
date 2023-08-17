@@ -1,44 +1,44 @@
 PODS:
-  - Au10tixBaseUI (3.9.0):
+  - Au10tixBaseUI (3.22.0):
     - Au10tixCore
-  - Au10tixCore (3.9.0)
-  - Au10tixDetectorManager (3.9.0):
+  - Au10tixCore (3.22.0)
+  - Au10tixDetectorManager (3.22.0):
     - Au10tixCore
-  - Au10tixPassiveFaceLivenessKit (3.9.0):
+  - Au10tixPassiveFaceLivenessKit (3.22.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixPassiveFaceLivenessUI (3.9.0):
+  - Au10tixPassiveFaceLivenessUI (3.22.0):
     - Au10tixBaseUI
     - Au10tixPassiveFaceLivenessKit
-  - Au10tixSmartDocumentCaptureKit (3.9.0):
+  - Au10tixSmartDocumentCaptureKit (3.22.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixSmartDocumentCaptureUI (3.9.0):
+  - Au10tixSmartDocumentCaptureUI (3.22.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSourceManager (3.9.0):
+  - Au10tixSourceManager (3.22.0):
     - Au10tixCore
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - permission_handler_apple (9.0.4):
+  - permission_handler_apple (9.1.1):
     - Flutter
   - sdk_core_flutter (0.0.1):
-    - Au10tixBaseUI (= 3.9.0)
-    - Au10tixCore (= 3.9.0)
-    - Au10tixDetectorManager (= 3.9.0)
-    - Au10tixSourceManager (= 3.9.0)
+    - Au10tixBaseUI (= 3.22.0)
+    - Au10tixCore (= 3.22.0)
+    - Au10tixDetectorManager (= 3.22.0)
+    - Au10tixSourceManager (= 3.22.0)
     - Flutter
   - sdk_pfl_flutter (0.0.1):
-    - Au10tixPassiveFaceLivenessKit (= 3.9.0)
-    - Au10tixPassiveFaceLivenessUI (= 3.9.0)
+    - Au10tixPassiveFaceLivenessKit (= 3.22.0)
+    - Au10tixPassiveFaceLivenessUI (= 3.22.0)
     - Flutter
     - sdk_core_flutter
   - sdk_sdc_flutter (0.0.1):
-    - Au10tixSmartDocumentCaptureKit (= 3.9.0)
-    - Au10tixSmartDocumentCaptureUI (= 3.9.0)
+    - Au10tixSmartDocumentCaptureKit (= 3.22.0)
+    - Au10tixSmartDocumentCaptureUI (= 3.22.0)
     - Flutter
     - sdk_core_flutter
 
@@ -76,20 +76,20 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
 
 SPEC CHECKSUMS:
-  Au10tixBaseUI: 8e5f0cd6aaed3e725685d821c633464d1e8235f1
-  Au10tixCore: 8617d75593e7de72031959a9e73f5013a7c2d95a
-  Au10tixDetectorManager: e5e0932760c6a6cc521482dfd55778a9807eafcd
-  Au10tixPassiveFaceLivenessKit: d501297bc6131ab9842d9a2ad06b437617cfb9c5
-  Au10tixPassiveFaceLivenessUI: a1ecce5bac991567fb24a1a26d413a65129e021d
-  Au10tixSmartDocumentCaptureKit: 852e6124aa40d172b54da197a770dcb3cd533f02
-  Au10tixSmartDocumentCaptureUI: 47486600639684116069c5bd8f6ccd53bc8f92f4
-  Au10tixSourceManager: 3c67f4e7d41ae5820e3d649339e0609d19ccf1a4
+  Au10tixBaseUI: 23dcfd54c6088dadd13ed870b31188f25c42f4ce
+  Au10tixCore: 302cb984e1519ee40eb06e2b5bcfd315d9cae95e
+  Au10tixDetectorManager: 8a46098c26c751973f5d5d8d9fa291bf883bf1e6
+  Au10tixPassiveFaceLivenessKit: f0961a86fbf8300ffaac0a39204d064563c3c656
+  Au10tixPassiveFaceLivenessUI: 79e5f51903d9b8a9cb9d9dd957cf76a37d086f6a
+  Au10tixSmartDocumentCaptureKit: 748824b427e0dd11f3f617ec97c6e1c9ed557bcb
+  Au10tixSmartDocumentCaptureUI: 4f7a309d08ed238b70cdd7342aa75665893146a8
+  Au10tixSourceManager: d386653fa54737e95326e262978ae055aba73dbe
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
-  sdk_core_flutter: 4d3dcb31b0b737bdd86c64b60587cf7d74740c87
-  sdk_pfl_flutter: bc84aad141f0875e9625a505a503bd707af04dfb
-  sdk_sdc_flutter: 12f02fb83f26fc3532334b2f716c0213bce00638
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
+  sdk_core_flutter: 4a69e7b559dda96863b514eff9bb0a621222fdd9
+  sdk_pfl_flutter: d70166fcbf07e8125f2b14a6c77c32a43aac48ce
+  sdk_sdc_flutter: 16148b909a46cc84fe1edd528af0aaaf63e4b77a
 
 PODFILE CHECKSUM: 8f7363fb8243a2ae318e66a6dac02af26dcde14f
 

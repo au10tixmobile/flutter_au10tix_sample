@@ -1,4 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors, avoid_print, unused_element
+
 import 'dart:io' show File;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
@@ -17,12 +20,6 @@ class _PFLPageState extends State<PFLPage> {
   Map? _hasValidation;
   String featureType = 'pfl';
 
-  @override
-  void dispose() {
-    super.dispose();
-    SdkPflFlutter.stopSession();
-  }
-
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
     final result = await SdkPflFlutter.onCaptureClicked();
@@ -38,7 +35,7 @@ class _PFLPageState extends State<PFLPage> {
       _showToast(context, _hasValidation?['pfl']['details'],
           passed == 1 ? Colors.green : Colors.red);
     } on PlatformException catch (e) {
-      _showToast(context, e.message!, Colors.red);
+      _showToast(context, e.details, Colors.red);
     }
   }
 
@@ -52,23 +49,13 @@ class _PFLPageState extends State<PFLPage> {
     );
   }
 
-  void _onRefreshClicked() {
-    setState(() {
-      _hasResult = null;
-    });
-    _startPFL();
-    _hasResult = null;
-    _hasValidation = null;
-  }
-
-  void _onApproveClicked() {
-    Navigator.of(context).pop();
-  }
-
   Future<void> _startPFL() async {
     if (await Permission.camera.request().isGranted) {
       try {
         final result = await SdkPflFlutter.startPFL();
+        if (kDebugMode) {
+          print(result.toString());
+        }
         setState(() {
           _hasResult = result;
         });
@@ -80,7 +67,6 @@ class _PFLPageState extends State<PFLPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("hasResult = ${_hasResult?['pfl']['status']}");
     return Scaffold(
       appBar: AppBar(
         title: const Text('PFL Page'),
@@ -130,6 +116,10 @@ class _PFLPageState extends State<PFLPage> {
               ),
             ],
           ),
+          // The functionality of the button below and its UI are only handling
+          // the validation action, however, in comments it also addresses
+          // refresh and approve after liveness passes to close.
+          // The relevant methods can be found below.
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -138,23 +128,18 @@ class _PFLPageState extends State<PFLPage> {
                 GestureDetector(
                   onTap: _hasResult == null
                       ? _onCaptureClick
-                      : _hasValidation != null
-                          ? _hasValidation!['pfl']['status'] == 1
-                              ? _onApproveClicked
-                              : _onRefreshClicked
-                          : _hasResult!['pfl']['status'] == 1
-                              ? _validateLiveness
-                              : _onRefreshClicked,
+                      :
+                      //: _hasResult!['pfl']['status'] == 1
+                      //?
+                      _validateLiveness,
+                  //: _onRefreshClicked,
                   child: Image.asset(
                     _hasResult == null
                         ? 'assets/images/capture_btn.png'
-                        : _hasValidation != null
-                            ? _hasValidation!['pfl']['status'] == 1
-                                ? 'assets/images/approve_btn.png'
-                                : 'assets/images/refresh_btn.png'
-                            : _hasResult!['pfl']['status'] == 1
-                                ? 'assets/images/approve_btn.png'
-                                : 'assets/images/refresh_btn.png',
+                        : //_hasResult!['pfl']['status'] == 1
+                        //?
+                        'assets/images/approve_btn.png',
+                    //: 'assets/images/refresh_btn.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -164,5 +149,16 @@ class _PFLPageState extends State<PFLPage> {
         ],
       ),
     );
+  }
+
+  void _onRefreshClicked() {
+    setState(() {
+      _hasResult = null;
+    });
+    _startPFL();
+  }
+
+  void _onApproveClicked() {
+    Navigator.of(context).pop();
   }
 }

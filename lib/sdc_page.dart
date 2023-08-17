@@ -91,34 +91,19 @@ class _SDCPageState extends State<SDCPage> {
                   ),
                 ),
               ),
-              StreamBuilder<String>(
-                  stream: SdkSdcFlutter.streamSdkUpdates()
-                      .map((event) => SdkSdcFlutter.getSDCTextUpdates(event)),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Positioned.fill(
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              color: Colors.grey[800],
-                              padding: const EdgeInsets.all(5),
-                              child: Text(
-                                '${snapshot.data}',
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return const Text('');
-                    }
-                  }),
+              _hasResult == null
+                  ? StreamBuilder<String>(
+                      stream: SdkSdcFlutter.streamSdkUpdates().map(
+                          (event) => SdkSdcFlutter.getSDCTextUpdates(event)),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return StatusLabel(snapshot.data!);
+                        } else {
+                          return const Text('');
+                        }
+                      })
+                  : StatusLabel(
+                      SdkSdcFlutter.getSDCTextUpdates(_hasResult, true)),
             ],
           ),
           Expanded(
@@ -152,6 +137,35 @@ class _SDCPageState extends State<SDCPage> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class StatusLabel extends StatelessWidget {
+  String data;
+
+  StatusLabel(this.data);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 20),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            color: Colors.grey[800],
+            padding: const EdgeInsets.all(5),
+            child: Text(
+              data,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -4,7 +4,7 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 ## Table of Contents
 
-- [flutter\_au10tix\_sample](#flutter_au10tix_sample)
+- [flutter_au10tix_sample](#flutter_au10tix_sample)
   - [Table of Contents](#table-of-contents)
   - [Compatibility](#compatibility)
     - [AU10TIX SDK](#au10tix-sdk)
@@ -18,8 +18,9 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
     - [Custom UI Implementation](#custom-ui-implementation)
       - [Smart Document Capture (SDC)](#smart-document-capture-sdc)
       - [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
-      - [PFL Status Codes](#pfl-status-codes)
+        - [PFL Status Codes](#pfl-status-codes)
     - [UI Component Implementation](#ui-component-implementation)
+    - [Au10tixCameraView Usage](#au10tixcameraview-usage)
   - [Support](#support)
     - [Contact](#contact)
 
@@ -29,16 +30,12 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 The plugin is compatible with the following native AU10TIX SDK versions:
 
-* Android: 2.7.3
-* iOS: 3.9.0
+- Android: 3.5.0
+- iOS: 3.22.0
 
 ### Flutter SDK
 
-Due to the fact that the SDK uses an AndroidView widget for the camera it is recommended to use:
-
-* Flutter SDK <= 2.10.5
-
-**Note**: Although later versions of the plugin work, there is a bug in the AndroidView widget causing it to ignore positioning and constraints stopping you from positioning it as you see fit.
+Tested with channel stable 3.10.6.
 
 ## Project Setup
 
@@ -52,55 +49,58 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
 2. Open the `pubspec.yaml` file.
 3. Add the AU10TIX plugin dependencies from pub.dev as follows:
 
-    ```yaml
-    dependencies:
-      flutter:
-        sdk: flutter
-      sdk_sdc_flutter: ^1.1.2
-      sdk_pfl_flutter: ^1.1.2
-    ```
-    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
-    
-    PFL - <https://pub.dev/packages/sdk_pfl_flutter>
+   ```yaml
+   dependencies:
+     flutter:
+       sdk: flutter
+     sdk_sdc_flutter: ^1.3.0
+     sdk_pfl_flutter: ^1.3.0
+   ```
+
+   SDC - <https://pub.dev/packages/sdk_sdc_flutter>
+
+   PFL - <https://pub.dev/packages/sdk_pfl_flutter>
+
 4. Android:
 
-    1. In the `android` folder, open the `local.properties` file.
-    2. Add the following:
+   1. In the `android` folder, open the `local.properties` file.
+   2. Add the following:
 
-        ```js
-        key=<your_au10tix_pat>
-        ```
+      ```gradle
+      key=<your_au10tix_pat>
+      ```
 
-       The AU10TIX Android SDK will use your PAT to implement the dependencies.
+      The AU10TIX Android SDK will use your PAT to implement the dependencies.
 
 5. iOS:
 
-    1. In the `iOS` folder, open the `podfile`.
-    2. Make sure you set the `platform` as follows:
+   1. In the `iOS` folder, open the `podfile`.
+   2. Make sure you set the `platform` as follows:
 
-        ```json
-        platform :ios, '13.0'
-        ```
+      ```json
+      platform :ios, '13.0'
+      ```
 
-    3. Find the following line `flutter_ios_podfile_setup` and paste the following:
+   3. Find the following line `flutter_ios_podfile_setup` and paste the following:
 
-        ```json
-        flutter_ios_podfile_setup
-        source 'https://github.com/CocoaPods/Specs.git'
-        source 'https://github.com/au10tixmobile/iOS_Artifacts_cocoapods_spec.git'
-        ```
+      ```json
+      flutter_ios_podfile_setup
+      source 'https://github.com/CocoaPods/Specs.git'
+      source 'https://github.com/au10tixmobile/iOS_Artifacts_cocoapods_spec.git'
+      ```
 
-    4. Save and run `pod install` in the terminal.
+   4. Save and run `pod install` in the terminal.
+
 6. Run `flutter pub get`.
 
 ### Permissions
 
 The AU10TIX SDK requires the following permissions:
 
-* Camera
-* Storage
-* Location
-* Microphone
+- Camera
+- Storage
+- Location
+- Microphone
 
 In this sample we use the `permission_handler` plugin: <https://pub.dev/packages/permission_handler>.
 
@@ -112,21 +112,21 @@ Follow the guide in the plugin to add the permissions above.
 
 1. Import the AU10TIX Core plugin:
 
-    ```dart
-    import 'package:sdk_core_flutter/sdk_core_flutter.dart';
-    ```
+   ```dart
+   import 'package:sdk_core_flutter/sdk_core_flutter.dart';
+   ```
 
 1. Initialize the SDK:
 
-    ```dart
-    Au10tix.init(<jwt_token>);
-    ```
+   ```dart
+   Au10tix.init(<jwt_token>);
+   ```
 
 1. As the `init` function is of type `Future<Map<dynamic, dynamic>>` if you would like to parse the session ID from the result, do this as follows (remember to add `await`):
 
-    ```dart
-    result['init']
-    ```
+   ```dart
+   result['init']
+   ```
 
 ### Custom UI Implementation
 
@@ -134,141 +134,123 @@ Follow the guide in the plugin to add the permissions above.
 
 Now that the session is ready, we can start the SDC feature:
 
-1. The SDC camera session requires a native view to be passed for the frames to be previewed. To achieve this with Flutter code import the `Au10tixCameraView` widget.
-
-    ```dart
-    import 'package:sdk_core_flutter/camera_view.dart';
-    ```
-
-1. The widget contains two parameters; `viewType` and `featureHandlerFn`. The view type should be of type "au10tixCameraViewSDC" and the handler function will be triggered once the view is ready, that is when it best recommended to start the SDC feature. Add the widget to yours like so:
-
-    ```dart
-    Au10tixCameraView(
-                        featureHandlerFn: _startSDC,
-                        viewType: "au10tixCameraViewSDC")                      
-    ```
+1. The SDC camera session requires a native view to be passed for the frames to be previewed. To achieve this with Flutter code use the `Au10tixCameraView` widget, and set the `viewType` to "au10tixCameraViewSDC". Read more about the view [here](#au10tixcameraview-usage).
 
 1. Import the SDC plugin:
 
-    ```dart
-    import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
-    ```
+   ```dart
+   import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
+   ```
 
 1. Start the feature:
 
-    ```dart
-    SdkSdcFlutter.startSDC();
-    ```
+   ```dart
+   SdkSdcFlutter.startSDC();
+   ```
 
    The method above returns a `Future<dynamic>`, specifically for SDC is of type `Map`. The object contains three keys; `status`, `imagePath` and `croppedFilePath`.  
    The `status` key contains a value that reflects the image situation:
 
-   | Status | Description |
-   | ----------- | ----------- |
-   | 0 | Bad Image Quality |
-   | 1 | Hold Steady |
-   | 2 | No ID Detected |
-   | 3 | Image Too Far |
-   | 4 | Image Too Close |
-   | 5 | Image Outside of Frame |
+   | Status | Description            |
+   | ------ | ---------------------- |
+   | 0      | Bad Image Quality      |
+   | 1      | Hold Steady            |
+   | 2      | No ID Detected         |
+   | 3      | Image Too Far          |
+   | 4      | Image Too Close        |
+   | 5      | Image Outside of Frame |
 
-    **Note**: In the result status, only one of the first three will be returned, the rest are used for live updates.
+   **Note**: In the result status, only one of the first three will be returned, the rest are used for live updates.
 
-    The `imagePath` contains a string with the path to the cached original captured image. This is usually used to display what was captured to the user.
+   The `imagePath` contains a string with the path to the cached original captured image. This is usually used to display what was captured to the user.
 
-    The `croppedFilePath` contains a string to the path of the cropped captured image, which is the same image containing only the ID itself. This is the image recommended to send to the AU10TIX server.  
+   The `croppedFilePath` contains a string to the path of the cropped captured image, which is the same image containing only the ID itself. This is the image recommended to send to the AU10TIX server.  
     To parse these fields:
 
-    ```dart
-    final result = await SdkSdcFlutter.startSDC();
-    final status = result['sdc']['status']
-    final imagePath = result['sdc']['imagePath']
-    final croppedImagePath = result['sdc']['croppedFilePath']
-    ```
+   ```dart
+   final result = await SdkSdcFlutter.startSDC();
+   final status = result['sdc']['status']
+   final imagePath = result['sdc']['imagePath']
+   final croppedImagePath = result['sdc']['croppedFilePath']
+   ```
 
 1. To receive updates on evaluated frames (see the previous step for the updates table), you set a stream, preferably using a `StreamBuilder`:
 
-    ```dart
-    SdkSdcFlutter.streamSdkUpdates()
-    ```
+   ```dart
+   SdkSdcFlutter.streamSdkUpdates()
+   ```
 
-    The plugin also contains a method that parses the update statuses and returns a text string:
+   The plugin also contains a method that parses the update statuses and returns a text string:
 
-    ```dart
-    SdkSdcFlutter.getSDCTextUpdates(event)
-    ```
+   ```dart
+   SdkSdcFlutter.getSDCTextUpdates(event)
+   ```
 
-    If you'd like the `StreamBuilder` to output the text instead of the code use something like this:
+   If you'd like the `StreamBuilder` to output the text instead of the code use something like this:
 
-    ```dart
-    StreamBuilder<String>(
-                    stream: SdkSdcFlutter.streamSdkUpdates()
-                        .map((event) => SdkSdcFlutter.getSDCTextUpdates(event)),
-                    builder: (context, snapshot) {
-                        ...
-                        })
-    ```
+   ```dart
+   StreamBuilder<String>(
+                   stream: SdkSdcFlutter.streamSdkUpdates()
+                       .map((event) => SdkSdcFlutter.getSDCTextUpdates(event)),
+                   builder: (context, snapshot) {
+                       ...
+                       })
+   ```
 
 1. If for some reason you want to stop the session:
 
-    ```dart
-    SdkSDCFlutter.stopSession()
-    ```
+   ```dart
+   SdkSDCFlutter.stopSession()
+   ```
 
 1. To manually capture an image:
 
-    ```dart
-    SdkSDCFlutter.onCaptureClicked()
-    ```
+   ```dart
+   SdkSDCFlutter.onCaptureClicked()
+   ```
 
-    This method returns the same result as above.
+   This method returns the same result as above.
 
 1. To upload an image from the gallery:
 
-    ```dart
-    SdkSDCFlutter.onUploadClicked()
-    ```
+   ```dart
+   SdkSDCFlutter.onUploadClicked()
+   ```
 
-    This method uses the Flutter `image_picker` plugin to show the gallery. Once an image is selected, it is processed and a result is returned.
+   This method uses the Flutter `image_picker` plugin to show the gallery. Once an image is selected, it is processed and a result is returned.
 
 #### Passive Face Liveness (PFL)
 
 Like the SDC, make sure that the session is first prepared before using this plugin. To best understand this section make sure to first read the SDC section above.
 
-1. Import the package:
+1.  Import the package:
 
     ```dart
     import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
     ```
 
-1. Add the `Au10tixCameraView` for the camera preview, this time with the PFL `viewType` and a PFL handler:
+2.  Add the `Au10tixCameraView` for the camera preview, with the PFL `viewType`, "au10tixCameraViewPFL". Read more about the view [here](#au10tixcameraview-usage)
 
-    ```dart
-    Au10tixCameraView(
-                        featureHandlerFn: _startPFL,
-                        viewType: "au10tixCameraViewPFL")                      
-    ```
-
-1. Start the feature:
+3.  Start the feature:
 
     ```dart
     SdkPflFlutter.startPFL();
     ```
 
-1. The PFL is split into two parts, the first captures the selfie. The selfie is returned in the result that contains the same three keys as the SDC: `status`, `imagePath` and `croppedFilePath`. The status is either `0`, which means no face detected, or `1` which means the image is good and that the face was detected.
-The result is parsed as follows:
+4.  The PFL is split into two parts, the first captures the selfie. The selfie is returned in the result that contains the same three keys as the SDC: `status`, `imagePath` and `croppedFilePath`. The status is either `0`, which means no face detected, or `1` which means the image is good and that the face was detected.
+    The result is parsed as follows:
 
-    ```dart
-    final status = result['pfl']['status']
-    ```
+        ```dart
+        final status = result['pfl']['status']
+        ```
 
-    The selfie is used for face compare and also for the second part, the liveness check. To send the image for the liveness check:
+        The selfie is used for face compare and also for the second part, the liveness check. To send the image for the liveness check:
 
-    ```dart
-    SdkPflFlutter.validateLiveness();
-    ```
+        ```dart
+        SdkPflFlutter.validateLiveness();
+        ```
 
-1. The liveness result includes the following keys:
+5.  The liveness result includes the following keys:
     | Key | Values |
     | --- | --- |
     | status | 0 or 1 |
@@ -276,7 +258,8 @@ The result is parsed as follows:
     | result | A json object that holds the liveness detailed response with the keys: `probability`, `quality` and `score`. For more information on the PFL server response see the PFL documentation. |
 
     The liveness result can be parsed similarly to the selfie result.
-1. To receive streamed updates during the selfie capturing, like in SDC, create a `StreamBuilder` and you can also the map the update statuses to text like this:
+
+6.  To receive streamed updates during the selfie capturing, like in SDC, create a `StreamBuilder` and you can also the map the update statuses to text like this:
 
     ```dart
     StreamBuilder<String>(
@@ -288,13 +271,14 @@ The result is parsed as follows:
     ```
 
     The full list of statuses can be found below.
-1. If you need to stop the session manually:
+
+7.  If you need to stop the session manually:
 
     ```dart
     SdkPflFlutter.stopSession()
     ```
 
-1. To capture the selfie manually:
+8.  To capture the selfie manually:
 
     ```dart
     SdkPflFlutter.onCaptureClicked()
@@ -302,7 +286,7 @@ The result is parsed as follows:
 
     The result is returned in the same format as in the auto mode.
 
-#### PFL Status Codes
+##### PFL Status Codes
 
 The following is a list of codes for updates and errors:
 
@@ -342,8 +326,11 @@ static const int ERROR_LICENSE_ERROR = 328;
 static const int ERROR_INVALID_META = 329;
 static const int ERROR_UNKNOWN = 330;
 ```
+
 ### UI Component Implementation
+
 To start the UI components for SDC and PFL add the following code:
+
 ```dart
 //PFL
 final result = await SdkPflFlutter.startPFLUI();
@@ -351,13 +338,45 @@ final result = await SdkPflFlutter.startPFLUI();
 //SDC
 final result = await SdkPflFlutter.startSDCUI();
 ```
+
 The result will arrive after the user clicks approve.
+
 ```dart
     final status = result['sdc'/'pfl']['status']
     final imagePath = result['sdc'/'pfl']['imagePath']
     final croppedImagePath = result['sdc'/'pfl']['croppedFilePath']
 ```
+
 See the sample app for a clean implementation.
+
+### Au10tixCameraView Usage
+
+1. To use the view import the `Au10tixCameraView` widget:
+
+   ```dart
+   import 'package:sdk_core_flutter/camera_view.dart';
+   ```
+
+2. Add the widget:
+
+   ```dart
+   Au10tixCameraView(
+        featureHandlerFn: <fn>,
+        viewType: <viewTypeString>
+        )
+   ```
+
+   The widget has six parameters two required and four optional.
+   Required:
+
+   - `featureHandlerFn` - function to be trigggered when view is ready. This is a good place to put the function that starts the feature.
+   - `viewType` - the feature that the view is being used for. Specifics can be found in the usage of each feature.
+
+   Optional:
+
+   - `width` & `height` which allow you to pass values for the width and height of the camera, although it is recommended to use the default values which will result in the view capturing 3/4 of the screen.
+   - `withOverlay` & `overlayColor` are used to start the camera view with an overlay over it. There's a bug in the current Flutter's AndroidViewSurface when it comes to supporting camera in a view which results in a weird affect of the background disappearing a second before the camera preview is shown. To avoid that there's the option of starting the view with the overlay which is removed after the frames start showing. This doesn't always occur and/or is not always noticable. Feel free to try it and decide for yourself whether or not to use it.
+
 ## Support
 
 ### Contact
