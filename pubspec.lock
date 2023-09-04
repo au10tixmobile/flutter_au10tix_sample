@@ -316,26 +316,26 @@ packages:
     dependency: transitive
     description:
       name: sdk_core_flutter
-      sha256: "475330c309af08a459829cbdfc55311745516b3ab24081f31e85fc946e34884a"
+      sha256: fa7081b08a76197bc13f213265af547423a2401bb576a4657dec428317bdf861
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.1"
+    version: "1.3.2"
   sdk_pfl_flutter:
     dependency: "direct main"
     description:
       name: sdk_pfl_flutter
-      sha256: e9ea92833908bd913774475ac923bb61b682479f7729b97903aae015c2ed221f
+      sha256: "27be4fbe65f1201b855b5ce02722f1a3c18abbed4b025dd3eb4103c294f7a53d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.0"
+    version: "1.3.1"
   sdk_sdc_flutter:
     dependency: "direct main"
     description:
       name: sdk_sdc_flutter
-      sha256: f32e64cd3e4b19bc4d035f8e6fbb1c8f45ff01088a817dd33b3d51219a526504
+      sha256: b31edc0ae2c75dad93783a66b93af4ed5e2ba4281b60a38f884a556d191f5a51
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.0"
+    version: "1.3.1"
   sky_engine:
     dependency: transitive
     description: flutter

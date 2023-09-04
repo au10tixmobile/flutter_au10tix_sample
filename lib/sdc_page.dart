@@ -65,6 +65,7 @@ class _SDCPageState extends State<SDCPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: _onBackPressed),
         title: const Text('SDC Page'),
       ),
       body: Column(
@@ -139,6 +140,11 @@ class _SDCPageState extends State<SDCPage> {
         ],
       ),
     );
+  }
+
+  void _onBackPressed() {
+    SdkSdcFlutter.stopSession();
+    Navigator.of(context).pop();
   }
 }
 

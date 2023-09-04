@@ -31,7 +31,7 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 The plugin is compatible with the following native AU10TIX SDK versions:
 
 - Android: 3.5.0
-- iOS: 3.22.0
+- iOS: 3.23.0
 
 ### Flutter SDK
 
@@ -53,8 +53,8 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
    dependencies:
      flutter:
        sdk: flutter
-     sdk_sdc_flutter: ^1.3.0
-     sdk_pfl_flutter: ^1.3.0
+     sdk_sdc_flutter: ^1.3.1
+     sdk_pfl_flutter: ^1.3.1
    ```
 
    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
