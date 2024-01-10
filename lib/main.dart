@@ -11,6 +11,7 @@ import './pfl_page.dart';
 import './sdc_page.dart';
 import './poa_page.dart';
 import './personal_data_dialog.dart';
+import 'toggle_button_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,11 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   static const String _authToken =
       'eyJraWQiOiJSYW1XZlpMc3VZdVFwMzUzRV9ETmRQWWo0YnphUEhyT2JGLWNVMm9uSktNIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULk1UZnFqaW9NYTF4LTdUSzVVRGlRQ21VS1ltSXJBeEQ4Z0FDLXFKZjBCQWMiLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDQ4ODcwNzEsImV4cCI6MTcwNDkwMTQ3MSwiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImRvY3JlcGxheSIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.j3LsgTWHwS_zI40IlIN1hJNEPY0QztSimDlFcL2H-GoEx6NZmf9tq9ZnTHymFiJGbBxhU4dJGb9Pj2PzdbfziJKH71uNM7cbyrud7KQfXq-iUt8q39kMAlWpwd6O7pciQGQInDsCWLnNjh-xNDKGo9rKBlLD1jT4nNL_0q2fZ2d6SRfO98DXNinm2gX-z0PnjG2EAv07fZsth_cX25WTogoJKzWGkfjShibZbYckniQGIZzLBZtHdsyFHYry_hKWa8VA2ghKXjsIfw_6uO9Wn7rMdWLXOY6aUTJe3iexvKk953nkd9h8VsCL4zN-Fn1qVzJJ_70ApLSoQOOfm6bwfA';
+
+  bool showCloseBtn = true;
+  bool showPrimaryBtn = true;
+  bool showUploadBtn = true;
+  bool showIntro = true;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -99,10 +105,10 @@ class HomePage extends StatelessWidget {
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
-          showIntroScreen: true,
-          showCloseButton: true,
-          showPrimaryButton: true,
-          canUpload: true);
+          showIntroScreen: showIntro,
+          showCloseButton: showCloseBtn,
+          showPrimaryButton: showPrimaryBtn,
+          canUpload: showUploadBtn);
       final result = await SdkSdcFlutter.startSDCUI(
           uiConfig: uiConfig, isFrontSide: isFrontSide);
       if (kDebugMode) {
@@ -119,9 +125,10 @@ class HomePage extends StatelessWidget {
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
-          showIntroScreen: true,
-          showCloseButton: true,
-          showPrimaryButton: true);
+        showIntroScreen: showIntro,
+        showCloseButton: showCloseBtn,
+        showPrimaryButton: showPrimaryBtn,
+      );
       final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
       if (kDebugMode) {
         print(result.toString());
@@ -152,6 +159,26 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  void onToggleButtonChanged(int index, bool isSelected) {
+    print('Button $index is now ${isSelected ? 'selected' : 'unselected'}');
+    switch (index) {
+      case 0:
+        showCloseBtn = isSelected;
+        break;
+      case 1:
+        showPrimaryBtn = isSelected;
+        break;
+      case 2:
+        showUploadBtn = isSelected;
+        break;
+      case 3:
+        showIntro = isSelected;
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,17 +200,22 @@ class HomePage extends StatelessWidget {
               endIndent: 20,
               color: Colors.black,
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pushNamed(
-                  SDCPage.routeName,
-                  arguments: {"isFrontSide": true}),
-              child: const Text("Start SDC - Front"),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pushNamed(
-                  SDCPage.routeName,
-                  arguments: {"isFrontSide": false}),
-              child: const Text("Start SDC - Back"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pushNamed(
+                      SDCPage.routeName,
+                      arguments: {"isFrontSide": true}),
+                  child: const Text("Start SDC - Front"),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pushNamed(
+                      SDCPage.routeName,
+                      arguments: {"isFrontSide": false}),
+                  child: const Text("Start SDC - Back"),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () =>
@@ -202,13 +234,24 @@ class HomePage extends StatelessWidget {
               endIndent: 20,
               color: Colors.black,
             ),
-            ElevatedButton(
-              onPressed: () => _startSDCUI(),
-              child: const Text("Start SDC UI - Front"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ToggleButtonsWidget(
+                onToggle: onToggleButtonChanged,
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => _startSDCUI(isFrontSide: false),
-              child: const Text("Start SDC UI - Back"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _startSDCUI(),
+                  child: const Text("Start SDC UI - Front"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _startSDCUI(isFrontSide: false),
+                  child: const Text("Start SDC UI - Back"),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () => _startPFLUI(),
