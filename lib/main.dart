@@ -10,6 +10,7 @@ import 'package:sdk_core_flutter/ui_config.dart';
 import './pfl_page.dart';
 import './sdc_page.dart';
 import './poa_page.dart';
+import './personal_data_dialog.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,9 +77,10 @@ class HomePage extends StatelessWidget {
     } catch (error) {}
   }
 
-  Future<void> _sendPOA(BuildContext context) async {
+  Future<void> _sendPOA(BuildContext context, String firstName, String lastName,
+      String address) async {
     try {
-      final result = await Au10tix.sendPOA("shai", "herman", "123 abbey rd");
+      final result = await Au10tix.sendPOA(firstName, lastName, address);
       if (result.containsKey("beKit")) {
         _showToast(context, result["beKit"].toString(), Colors.green);
       }
@@ -86,6 +88,11 @@ class HomePage extends StatelessWidget {
       _showToast(context, error.message!, Colors.red);
       // ignore: empty_catches
     } catch (error) {}
+  }
+
+  void handleContinue(
+      String firstName, String lastName, String address, BuildContext context) {
+    _sendPOA(context, firstName, lastName, address);
   }
 
   Future<void> _startSDCUI({bool isFrontSide = true}) async {
@@ -227,7 +234,15 @@ class HomePage extends StatelessWidget {
               child: const Text("Send F2F Request"),
             ),
             ElevatedButton(
-              onPressed: () => _sendPOA(context),
+              onPressed: () => {
+                showDialog(
+                  context: context,
+                  builder: (context) => WillPopScope(
+                    onWillPop: () async => false,
+                    child: PersonalDataDialog(onContinue: handleContinue),
+                  ),
+                )
+              },
               child: const Text("Send POA Request"),
             ),
           ],
