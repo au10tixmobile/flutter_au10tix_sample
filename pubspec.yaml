@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.2.1
 
 environment:
-  sdk: '>=2.15.1 <3.0.0'
+  sdk: ">=2.15.1 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -29,8 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sdk_sdc_flutter: ^1.3.1
-  sdk_pfl_flutter: ^1.3.1
+  sdk_sdc_flutter: #^1.3.1
+    path: /Users/shai.herman/Documents/Development/Repos/Flutter/sdk_sdc_flutter
+  sdk_pfl_flutter: #^1.3.1
+    path: /Users/shai.herman/Documents/Development/Repos/Flutter/sdk_pfl_flutter
   permission_handler: ^10.2.0
 
   # The following adds the Cupertino Icons font to your application.
