@@ -39,12 +39,13 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   static const String _authToken =
-      'eyJraWQiOiJSYW1XZlpMc3VZdVFwMzUzRV9ETmRQWWo0YnphUEhyT2JGLWNVMm9uSktNIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULk1UZnFqaW9NYTF4LTdUSzVVRGlRQ21VS1ltSXJBeEQ4Z0FDLXFKZjBCQWMiLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDQ4ODcwNzEsImV4cCI6MTcwNDkwMTQ3MSwiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImRvY3JlcGxheSIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.j3LsgTWHwS_zI40IlIN1hJNEPY0QztSimDlFcL2H-GoEx6NZmf9tq9ZnTHymFiJGbBxhU4dJGb9Pj2PzdbfziJKH71uNM7cbyrud7KQfXq-iUt8q39kMAlWpwd6O7pciQGQInDsCWLnNjh-xNDKGo9rKBlLD1jT4nNL_0q2fZ2d6SRfO98DXNinm2gX-z0PnjG2EAv07fZsth_cX25WTogoJKzWGkfjShibZbYckniQGIZzLBZtHdsyFHYry_hKWa8VA2ghKXjsIfw_6uO9Wn7rMdWLXOY6aUTJe3iexvKk953nkd9h8VsCL4zN-Fn1qVzJJ_70ApLSoQOOfm6bwfA';
+      'eyJraWQiOiJ1Z3drcXd2V2lqUUoyZ1FrcTVjTlEyV0hKb0JPRzZaVk0xRENrZnZwbHhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjQ1M3VBblNqeGQzUUJ1NFd4c2dvYkc4OExLa2V5aW1qc2p0c2w0Y2VxMEEiLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDUyMzMzMzMsImV4cCI6MTcwNTI0NzczMywiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.eTXP1KkXsx9L6k-0CbTBuO-CaBQfluBBDflsKMK1Sap9QzICVNAAm6rN8DuLG3kpRvzROPc__C6uqwzvzAS4r1qk9LxkXVeKVqKSQHl22BKI_k0NGMGm-ZFFtOBJHhR-4-qazg2hdI_fRAcd2-sEBvMTnmS4pejxhr2iqtd57J0J0e3MQ-7JBv6G5x11czToxZOASNhh37KgAknZ1TLKe3ROjRk7K6aZGeF1MuXua3raA284nFa9D3G0ZDgefar0Sp2f6ETdWlqNf1-V4qHkB1dCOlguPMPyDRe5Xpem79bUnomgbQ-UGO_NzOXTxLIpeTYS3JX283XsxR9DUxWDvQ';
 
-  bool showCloseBtn = true;
-  bool showPrimaryBtn = true;
-  bool showUploadBtn = true;
-  bool showIntro = true;
+  var _sdcUIResult;
+  bool _showCloseBtn = true;
+  bool _showPrimaryBtn = true;
+  bool _showUploadBtn = true;
+  bool _showIntro = true;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -105,14 +106,14 @@ class HomePage extends StatelessWidget {
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
-          showIntroScreen: showIntro,
-          showCloseButton: showCloseBtn,
-          showPrimaryButton: showPrimaryBtn,
-          canUpload: showUploadBtn);
-      final result = await SdkSdcFlutter.startSDCUI(
+          showIntroScreen: _showIntro,
+          showCloseButton: _showCloseBtn,
+          showPrimaryButton: _showPrimaryBtn,
+          canUpload: _showUploadBtn);
+      _sdcUIResult = await SdkSdcFlutter.startSDCUI(
           uiConfig: uiConfig, isFrontSide: isFrontSide);
       if (kDebugMode) {
-        print(result.toString());
+        print(_sdcUIResult.toString());
       }
     } on PlatformException catch (error) {
       if (kDebugMode) {
@@ -125,9 +126,9 @@ class HomePage extends StatelessWidget {
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
-        showIntroScreen: showIntro,
-        showCloseButton: showCloseBtn,
-        showPrimaryButton: showPrimaryBtn,
+        showIntroScreen: _showIntro,
+        showCloseButton: _showCloseBtn,
+        showPrimaryButton: _showPrimaryBtn,
       );
       final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
       if (kDebugMode) {
@@ -159,20 +160,37 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  Future<void> _sendFEC(BuildContext context) async {
+    try {
+      final result = await SdkSdcFlutter.performFEC(
+          _sdcUIResult['sdc']['croppedFilePath']);
+      if (result.containsKey("fec")) {
+        print(result["fec"].toString());
+        _showToast(
+            context,
+            'FEC Result = ${result["fec"]["classificationResult"].toString()}',
+            Colors.green);
+      }
+    } on PlatformException catch (error) {
+      _showToast(context, error.message!, Colors.red);
+      // ignore: empty_catches
+    } catch (error) {}
+  }
+
   void onToggleButtonChanged(int index, bool isSelected) {
     print('Button $index is now ${isSelected ? 'selected' : 'unselected'}');
     switch (index) {
       case 0:
-        showCloseBtn = isSelected;
+        _showCloseBtn = isSelected;
         break;
       case 1:
-        showPrimaryBtn = isSelected;
+        _showPrimaryBtn = isSelected;
         break;
       case 2:
-        showUploadBtn = isSelected;
+        _showUploadBtn = isSelected;
         break;
       case 3:
-        showIntro = isSelected;
+        _showIntro = isSelected;
         break;
       default:
         break;
@@ -287,6 +305,10 @@ class HomePage extends StatelessWidget {
                 )
               },
               child: const Text("Send POA Request"),
+            ),
+            ElevatedButton(
+              onPressed: () => _sendFEC(context),
+              child: const Text("Send FEC Request"),
             ),
           ],
         ),

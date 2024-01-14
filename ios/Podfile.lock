@@ -100,7 +100,7 @@ SPEC CHECKSUMS:
   Au10tixSmartDocumentCaptureUI: 18f42ed0e52a756929203f9fa1922d9c982209da
   Au10tixSourceManager: cd034999d7192056e6305d181e2e68f68664bbcc
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   sdk_core_flutter: 68837c5b5b3a44f00ddd051195dc41365eb43403
   sdk_pfl_flutter: 9e5abe3e827d6ea3e5d928d4d029b6d3ceb28162

@@ -26,7 +26,7 @@ class _POAPageState extends State<POAPage> {
   }
 
   Future<void> _onUploadClick() async {
-    final result = await SdkSdcFlutter.onUploadClicked(isPOA: true);
+    final result = await SdkSdcFlutter.onUploadClicked();
     setState(() {
       _hasResult = result;
     });
