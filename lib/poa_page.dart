@@ -19,14 +19,14 @@ class _POAPageState extends State<POAPage> {
   Map? _hasResult;
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
-    final result = await SdkSdcFlutter.onCaptureClicked();
+    final result = await SdkSdcFlutter.onCaptureClicked(isPOA: true);
     setState(() {
       _hasResult = result;
     });
   }
 
   Future<void> _onUploadClick() async {
-    final result = await SdkSdcFlutter.onUploadClicked();
+    final result = await SdkSdcFlutter.onUploadClicked(isPOA: true);
     setState(() {
       _hasResult = result;
     });
