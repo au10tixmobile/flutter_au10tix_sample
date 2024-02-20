@@ -17,6 +17,7 @@ class SDCPage extends StatefulWidget {
 
 class _SDCPageState extends State<SDCPage> {
   Map? _hasResult;
+  var _isFrontSide = false;
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
     final result = await SdkSdcFlutter.onCaptureClicked();
@@ -46,7 +47,7 @@ class _SDCPageState extends State<SDCPage> {
   Future<void> _startSDC() async {
     if (await Permission.camera.request().isGranted) {
       try {
-        final result = await SdkSdcFlutter.startSDC();
+        final result = await SdkSdcFlutter.startSDC(isFrontSide: _isFrontSide);
         if (kDebugMode) {
           print(result.toString());
         }
@@ -63,6 +64,10 @@ class _SDCPageState extends State<SDCPage> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+
+    _isFrontSide = arguments['isFrontSide'];
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: _onBackPressed),

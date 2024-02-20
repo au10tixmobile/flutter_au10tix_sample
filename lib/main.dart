@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_au10tix_sample/flow_toggle_button_widget.dart';
 import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
 import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
@@ -11,7 +12,7 @@ import './pfl_page.dart';
 import './sdc_page.dart';
 import './poa_page.dart';
 import './personal_data_dialog.dart';
-import 'toggle_button_widget.dart';
+import 'ui_toggle_button_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,13 +40,14 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   static const String _authToken =
-      'eyJraWQiOiJ1Z3drcXd2V2lqUUoyZ1FrcTVjTlEyV0hKb0JPRzZaVk0xRENrZnZwbHhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjQ1M3VBblNqeGQzUUJ1NFd4c2dvYkc4OExLa2V5aW1qc2p0c2w0Y2VxMEEiLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDUyMzMzMzMsImV4cCI6MTcwNTI0NzczMywiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.eTXP1KkXsx9L6k-0CbTBuO-CaBQfluBBDflsKMK1Sap9QzICVNAAm6rN8DuLG3kpRvzROPc__C6uqwzvzAS4r1qk9LxkXVeKVqKSQHl22BKI_k0NGMGm-ZFFtOBJHhR-4-qazg2hdI_fRAcd2-sEBvMTnmS4pejxhr2iqtd57J0J0e3MQ-7JBv6G5x11czToxZOASNhh37KgAknZ1TLKe3ROjRk7K6aZGeF1MuXua3raA284nFa9D3G0ZDgefar0Sp2f6ETdWlqNf1-V4qHkB1dCOlguPMPyDRe5Xpem79bUnomgbQ-UGO_NzOXTxLIpeTYS3JX283XsxR9DUxWDvQ';
+      'eyJraWQiOiJ1Z3drcXd2V2lqUUoyZ1FrcTVjTlEyV0hKb0JPRzZaVk0xRENrZnZwbHhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjhZYjFvTXFFdHhIVVhyYnpXY0k5dWhZbXZCQlhEQm9TZ2pyTzFGakRUcmciLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDg0MjQ1MTcsImV4cCI6MTcwODQzODkxNywiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.FrkZ78D77q4qOwx6773mMfEMVq_7Hxsq8bz2e2S82BuMDz_2D_FP-SalFeuRxnq5mWuA768RkSKXQjDMXr5IE1baZpERqRVo4q-IdryPu0xENj_LLDhlZqZAMNZx80w_sEsp2uI5N6gGmsU12Rz47iOv9CVj8Wo53UevjHbWJkFIxDOrKx3K0RgsKQD823RgGNqEWVOXKSGP_tv3G1yJnOkdDZBN6_T8uQIQKzetx09qXwkvdxtBiLcXWTY626QIThDfGNhoPoec73YzXrVsSZEfMbvg_LicZBqwVRTqOqVOlQDGKtPAE08Uml401oSyrsjOBWfO16KrcmCra-FkPA';
 
   var _sdcUIResult;
   bool _showCloseBtn = true;
   bool _showPrimaryBtn = true;
   bool _showUploadBtn = true;
   bool _showIntro = true;
+  bool _isF2F = false;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -64,6 +66,7 @@ class HomePage extends StatelessWidget {
       final result = await Au10tix.sendIDV();
       if (result.containsKey("beKit")) {
         _showToast(context, result["beKit"].toString(), Colors.green);
+        print(result["beKit"].toString());
       }
     } on PlatformException catch (error) {
       _showToast(context, error.message!, Colors.red);
@@ -73,6 +76,7 @@ class HomePage extends StatelessWidget {
 
   Future<void> _sendF2F(BuildContext context) async {
     final String? imagePath = await Au10tix.getImageFromGallery();
+    print(imagePath);
     try {
       final result = await Au10tix.sendF2F(imagePath!);
       if (result.containsKey("beKit")) {
@@ -123,6 +127,7 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _startPFLUI() async {
+    print("isF2f = $_isF2F");
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
@@ -130,7 +135,8 @@ class HomePage extends StatelessWidget {
         showCloseButton: _showCloseBtn,
         showPrimaryButton: _showPrimaryBtn,
       );
-      final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
+      final result =
+          await SdkPflFlutter.startPFLUI(uiConfig: uiConfig, isF2F: _isF2F);
       if (kDebugMode) {
         print(result.toString());
       }
@@ -145,10 +151,10 @@ class HomePage extends StatelessWidget {
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
-          showIntroScreen: true,
-          showCloseButton: true,
-          showPrimaryButton: true,
-          canUpload: true);
+          showIntroScreen: _showIntro,
+          showCloseButton: _showCloseBtn,
+          showPrimaryButton: _showPrimaryBtn,
+          canUpload: _showUploadBtn);
       final result = await SdkSdcFlutter.startPOAUI(uiConfig: uiConfig);
       if (kDebugMode) {
         print(result.toString());
@@ -177,8 +183,8 @@ class HomePage extends StatelessWidget {
     } catch (error) {}
   }
 
-  void onToggleButtonChanged(int index, bool isSelected) {
-    print('Button $index is now ${isSelected ? 'selected' : 'unselected'}');
+  void onUIToggleButtonChanged(int index, bool isSelected) {
+    print("$index is selected $isSelected");
     switch (index) {
       case 0:
         _showCloseBtn = isSelected;
@@ -197,6 +203,18 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  void onFlowToggleButtonChanged(int index, bool isSelected) {
+    print("$index is selected $isSelected");
+
+    switch (index) {
+      case 0:
+        _isF2F = !isSelected;
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,9 +225,20 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () => _prepareSDK(context),
-              child: const Text("Prepare SDK"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _prepareSDK(context),
+                  child: const Text("Prepare SDK"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FlowToggleButtonsWidget(
+                    onToggle: onFlowToggleButtonChanged,
+                  ),
+                ),
+              ],
             ),
             const Divider(
               height: 20,
@@ -235,15 +264,20 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(PFLPage.routeName),
-              child: const Text("Start PFL"),
-            ),
-            ElevatedButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(POAPage.routeName),
-              child: const Text("Start POA"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(PFLPage.routeName),
+                  child: const Text("Start PFL"),
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(POAPage.routeName),
+                  child: const Text("Start POA"),
+                ),
+              ],
             ),
             const Divider(
               height: 20,
@@ -254,8 +288,8 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ToggleButtonsWidget(
-                onToggle: onToggleButtonChanged,
+              child: UIToggleButtonsWidget(
+                onToggle: onUIToggleButtonChanged,
               ),
             ),
             Row(
@@ -271,13 +305,18 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () => _startPFLUI(),
-              child: const Text("Start PFL UI"),
-            ),
-            ElevatedButton(
-              onPressed: () => _startPOAUI(),
-              child: const Text("Start POA UI"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _startPFLUI(),
+                  child: const Text("Start PFL UI"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _startPOAUI(),
+                  child: const Text("Start POA UI"),
+                ),
+              ],
             ),
             const Divider(
               height: 20,
@@ -286,29 +325,39 @@ class HomePage extends StatelessWidget {
               endIndent: 20,
               color: Colors.black,
             ),
-            ElevatedButton(
-              onPressed: () => _sendIDV(context),
-              child: const Text("Send IDV Request"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _sendIDV(context),
+                  child: const Text("Send IDV Request"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _sendF2F(context),
+                  child: const Text("Send F2F Request"),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () => _sendF2F(context),
-              child: const Text("Send F2F Request"),
-            ),
-            ElevatedButton(
-              onPressed: () => {
-                showDialog(
-                  context: context,
-                  builder: (context) => WillPopScope(
-                    onWillPop: () async => false,
-                    child: PersonalDataDialog(onContinue: handleContinue),
-                  ),
-                )
-              },
-              child: const Text("Send POA Request"),
-            ),
-            ElevatedButton(
-              onPressed: () => _sendFEC(context),
-              child: const Text("Send FEC Request"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WillPopScope(
+                        onWillPop: () async => false,
+                        child: PersonalDataDialog(onContinue: handleContinue),
+                      ),
+                    )
+                  },
+                  child: const Text("Send POA Request"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _sendFEC(context),
+                  child: const Text("Send FEC Request"),
+                ),
+              ],
             ),
           ],
         ),
