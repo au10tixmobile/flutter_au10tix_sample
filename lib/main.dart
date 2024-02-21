@@ -39,8 +39,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  static const String _authToken =
-      'eyJraWQiOiJ1Z3drcXd2V2lqUUoyZ1FrcTVjTlEyV0hKb0JPRzZaVk0xRENrZnZwbHhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjhZYjFvTXFFdHhIVVhyYnpXY0k5dWhZbXZCQlhEQm9TZ2pyTzFGakRUcmciLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDg0MjQ1MTcsImV4cCI6MTcwODQzODkxNywiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsInNkYyIsImZlYyIsInBmbCIsIm1vYmlsZXNkayJdLCJzdWIiOiIwb2E5bnB2bHI5V25ZZVpjaDM1NyIsImFwaVVybCI6Imh0dHBzOi8vYXBpLXdldS5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJib3NVcmwiOiJodHRwczovL2Jvcy13ZWIuYXUxMHRpeHNlcnZpY2VzcWEuY29tIiwiY2xpZW50T3JnYW5pemF0aW9uTmFtZSI6IkRldl9UZXN0IiwiY2xpZW50T3JnYW5pemF0aW9uSWQiOjQ3OH0.FrkZ78D77q4qOwx6773mMfEMVq_7Hxsq8bz2e2S82BuMDz_2D_FP-SalFeuRxnq5mWuA768RkSKXQjDMXr5IE1baZpERqRVo4q-IdryPu0xENj_LLDhlZqZAMNZx80w_sEsp2uI5N6gGmsU12Rz47iOv9CVj8Wo53UevjHbWJkFIxDOrKx3K0RgsKQD823RgGNqEWVOXKSGP_tv3G1yJnOkdDZBN6_T8uQIQKzetx09qXwkvdxtBiLcXWTY626QIThDfGNhoPoec73YzXrVsSZEfMbvg_LicZBqwVRTqOqVOlQDGKtPAE08Uml401oSyrsjOBWfO16KrcmCra-FkPA';
+  static const String _authToken = '<your_jwt>';
 
   var _sdcUIResult;
   bool _showCloseBtn = true;
@@ -76,7 +75,6 @@ class HomePage extends StatelessWidget {
 
   Future<void> _sendF2F(BuildContext context) async {
     final String? imagePath = await Au10tix.getImageFromGallery();
-    print(imagePath);
     try {
       final result = await Au10tix.sendF2F(imagePath!);
       if (result.containsKey("beKit")) {

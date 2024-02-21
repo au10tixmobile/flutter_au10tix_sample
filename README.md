@@ -30,12 +30,12 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 The plugin is compatible with the following native AU10TIX SDK versions:
 
-- Android: 3.5.0
-- iOS: 3.23.0
+- Android: 3.7.2
+- iOS: 3.26.0
 
 ### Flutter SDK
 
-Tested with channel stable 3.10.6.
+Tested with channel stable 3.16.5.
 
 ## Project Setup
 
@@ -53,8 +53,8 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
    dependencies:
      flutter:
        sdk: flutter
-     sdk_sdc_flutter: ^1.3.1
-     sdk_pfl_flutter: ^1.3.1
+     sdk_sdc_flutter: ^1.3.4
+     sdk_pfl_flutter: ^1.3.4
    ```
 
    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
@@ -130,7 +130,7 @@ Follow the guide in the plugin to add the permissions above.
 
 ### Custom UI Implementation
 
-#### Smart Document Capture (SDC)
+#### Smart Document Capture (SDC) & Proof of Address (POA)
 
 Now that the session is ready, we can start the SDC feature:
 
@@ -145,7 +145,12 @@ Now that the session is ready, we can start the SDC feature:
 1. Start the feature:
 
    ```dart
+   //For SDC
    SdkSdcFlutter.startSDC();
+   //Add isFronSide: false in case you want to declare that you are starting SDC for backside.
+
+   //For POA
+   SdkSdcFlutter.startPOA();
    ```
 
    The method above returns a `Future<dynamic>`, specifically for SDC is of type `Map`. The object contains three keys; `status`, `imagePath` and `croppedFilePath`.  
@@ -168,10 +173,11 @@ Now that the session is ready, we can start the SDC feature:
     To parse these fields:
 
    ```dart
+   final featureName = 'sdc' // or 'poa'
    final result = await SdkSdcFlutter.startSDC();
-   final status = result['sdc']['status']
-   final imagePath = result['sdc']['imagePath']
-   final croppedImagePath = result['sdc']['croppedFilePath']
+   final status = result[featureName]['status']
+   final imagePath = result[featureName]['imagePath']
+   final croppedImagePath = result[featureName]['croppedFilePath']
    ```
 
 1. To receive updates on evaluated frames (see the previous step for the updates table), you set a stream, preferably using a `StreamBuilder`:
@@ -183,7 +189,11 @@ Now that the session is ready, we can start the SDC feature:
    The plugin also contains a method that parses the update statuses and returns a text string:
 
    ```dart
+   //For SDC
    SdkSdcFlutter.getSDCTextUpdates(event)
+
+   //For POA
+   SdkSdcFlutter.getPOATextUpdates(event)
    ```
 
    If you'd like the `StreamBuilder` to output the text instead of the code use something like this:
@@ -191,7 +201,7 @@ Now that the session is ready, we can start the SDC feature:
    ```dart
    StreamBuilder<String>(
                    stream: SdkSdcFlutter.streamSdkUpdates()
-                       .map((event) => SdkSdcFlutter.getSDCTextUpdates(event)),
+                       .map((event) => SdkSdcFlutter.getSDCTextUpdates(event)), //getPOATextUpdates(event)
                    builder: (context, snapshot) {
                        ...
                        })
@@ -206,7 +216,11 @@ Now that the session is ready, we can start the SDC feature:
 1. To manually capture an image:
 
    ```dart
+   //For SDC
    SdkSDCFlutter.onCaptureClicked()
+
+   //For POA
+   SdkSDCFlutter.onCaptureClicked(isPOA: true)
    ```
 
    This method returns the same result as above.
@@ -214,10 +228,27 @@ Now that the session is ready, we can start the SDC feature:
 1. To upload an image from the gallery:
 
    ```dart
-   SdkSDCFlutter.onUploadClicked()
+   SdkSDCFlutter.onUploadClicked(isPOA: true)
    ```
 
    This method uses the Flutter `image_picker` plugin to show the gallery. Once an image is selected, it is processed and a result is returned.
+
+##### Front End Classification (FEC)
+
+Using the SDC plugin you have the option of sending the captured image to the FEC service.
+
+1. To send the image to the service use the following command:
+
+```dart
+final result =
+          await SdkSdcFlutter.performFEC(sdcResult['sdc']['croppedFilePath']);
+```
+
+1. To parse the result:
+
+```dart
+final classificationResult = result["fec"]["classificationResult"]
+```
 
 #### Passive Face Liveness (PFL)
 
@@ -337,17 +368,38 @@ final result = await SdkPflFlutter.startPFLUI();
 
 //SDC
 final result = await SdkPflFlutter.startSDCUI();
+//isFront: false for backside
+
+//POA
+final result = await SdkPflFlutter.startPOAUI();
 ```
 
 The result will arrive after the user clicks approve.
 
 ```dart
-    final status = result['sdc'/'pfl']['status']
-    final imagePath = result['sdc'/'pfl']['imagePath']
-    final croppedImagePath = result['sdc'/'pfl']['croppedFilePath']
+    final featureName = 'sdc' // or 'pfl', 'poa'
+    final status = result[featureName]['status']
+    final imagePath = result[featureName]['imagePath']
+    final croppedImagePath = result[featureName]['croppedFilePath']
 ```
 
 See the sample app for a clean implementation.
+
+#### UI Configurations
+
+For each of the start methods above you can pass a uiConfig parameter like this:
+
+```dart
+      UIConfig uiConfig = UIConfig(
+          showIntroScreen: true, // show/hide the intro screen
+          showCloseButton: true, // show/hide the close button
+          showPrimaryButton: true, // show/hide the capture button
+          canUpload: true); // show/hide the upload option button
+
+      sdcUIResult = await SdkSdcFlutter.startSDCUI(uiConfig: uiConfig);
+```
+
+The default value for all the fields is true unless changed.
 
 ### Au10tixCameraView Usage
 
@@ -376,6 +428,30 @@ See the sample app for a clean implementation.
 
    - `width` & `height` which allow you to pass values for the width and height of the camera, although it is recommended to use the default values which will result in the view capturing 3/4 of the screen.
    - `withOverlay` & `overlayColor` are used to start the camera view with an overlay over it. There's a bug in the current Flutter's AndroidViewSurface when it comes to supporting camera in a view which results in a weird affect of the background disappearing a second before the camera preview is shown. To avoid that there's the option of starting the view with the overlay which is removed after the frames start showing. This doesn't always occur and/or is not always noticable. Feel free to try it and decide for yourself whether or not to use it.
+
+#### Backend integration
+
+You have the option of processing flows with the Au10tix backend directly from the mobile. The following flows are available:
+
+- Identity Verification(IDV)
+- Face to Face (F2F)
+- Proof of Address (POA)
+  The SDK knows to cache the media assets collected along the way and depending on the flow triggered they will be used when needed:
+
+```dart
+   //For IDV
+      final result = await Au10tix.sendIDV();
+
+   //For POA
+      final result = await Au10tix.sendPOA("John", "Smith", "123 abbey rd"); //this is the data that will be compared in the POA request
+
+   // For F2F
+      final String? imagePath = await Au10tix.getImageFromGallery();
+      final result = await Au10tix.sendF2F(imagePath!);
+
+   // Printing the request ID, keep it you will need it to poll for the result
+      print(result["beKit"]["requestID"].toString());
+```
 
 ## Support
 
