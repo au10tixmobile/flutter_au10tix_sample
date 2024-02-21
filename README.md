@@ -16,11 +16,14 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
   - [Usage](#usage)
     - [Preparing the SDK](#preparing-the-sdk)
     - [Custom UI Implementation](#custom-ui-implementation)
-      - [Smart Document Capture (SDC)](#smart-document-capture-sdc)
+      - [Smart Document Capture (SDC) & Proof of Address (POA)](#smart-document-capture-sdc--proof-of-address-poa)
+        - [Front End Classification (FEC)](#front-end-classification-fec)
       - [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
         - [PFL Status Codes](#pfl-status-codes)
     - [UI Component Implementation](#ui-component-implementation)
+      - [UI Configurations](#ui-configurations)
     - [Au10tixCameraView Usage](#au10tixcameraview-usage)
+    - [Backend Integration](#backend-integration)
   - [Support](#support)
     - [Contact](#contact)
 
@@ -429,7 +432,7 @@ The default value for all the fields is true unless changed.
    - `width` & `height` which allow you to pass values for the width and height of the camera, although it is recommended to use the default values which will result in the view capturing 3/4 of the screen.
    - `withOverlay` & `overlayColor` are used to start the camera view with an overlay over it. There's a bug in the current Flutter's AndroidViewSurface when it comes to supporting camera in a view which results in a weird affect of the background disappearing a second before the camera preview is shown. To avoid that there's the option of starting the view with the overlay which is removed after the frames start showing. This doesn't always occur and/or is not always noticable. Feel free to try it and decide for yourself whether or not to use it.
 
-#### Backend integration
+### Backend Integration
 
 You have the option of processing flows with the Au10tix backend directly from the mobile. The following flows are available:
 
