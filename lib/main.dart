@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Au10tix Flutter PFL Demo',
+      title: 'Au10tix Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -101,8 +101,7 @@ class HomePage extends StatelessWidget {
         showCloseButton: _showCloseBtn,
         showPrimaryButton: _showPrimaryBtn,
       );
-      final result =
-          await SdkPflFlutter.startPFLUI(uiConfig: uiConfig, isF2F: _isF2F);
+      final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
       if (kDebugMode) {
         print(result.toString());
       }

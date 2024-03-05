@@ -33,8 +33,8 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 The plugin is compatible with the following native AU10TIX SDK versions:
 
-- Android: 3.7.2
-- iOS: 3.26.0
+- Android: 4.0.0
+- iOS: 4.0.0
 
 ### Flutter SDK
 
@@ -56,8 +56,8 @@ Before getting started, make sure you are setup on GitHub with our native SDK an
    dependencies:
      flutter:
        sdk: flutter
-     sdk_sdc_flutter: ^1.3.4
-     sdk_pfl_flutter: ^1.3.4
+     sdk_sdc_flutter: ^2.0.0
+     sdk_pfl_flutter: ^2.0.0
    ```
 
    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
@@ -122,8 +122,10 @@ Follow the guide in the plugin to add the permissions above.
 1. Initialize the SDK:
 
    ```dart
-   Au10tix.init(<jwt_token>);
+   Au10tix.init(<workflowResponse>);
    ```
+
+   The workflow response object is the response you get when making a workflow request with Au10tix, for instance Au10tix101. An example of the response object can be found https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/lib/constants.dart.
 
 1. As the `init` function is of type `Future<Map<dynamic, dynamic>>` if you would like to parse the session ID from the result, do this as follows (remember to add `await`):
 
@@ -434,26 +436,13 @@ The default value for all the fields is true unless changed.
 
 ### Backend Integration
 
-You have the option of processing flows with the Au10tix backend directly from the mobile. The following flows are available:
-
-- Identity Verification(IDV)
-- Face to Face (F2F)
-- Proof of Address (POA)
-  The SDK knows to cache the media assets collected along the way and depending on the flow triggered they will be used when needed:
+You have the option of making the workflow begin processing request API to the Au10tix backend directly from the mobile:
 
 ```dart
-   //For IDV
-      final result = await Au10tix.sendIDV();
+      final result = await Au10tix.sendWorkflowRequest();
 
-   //For POA
-      final result = await Au10tix.sendPOA("John", "Smith", "123 abbey rd"); //this is the data that will be compared in the POA request
-
-   // For F2F
-      final String? imagePath = await Au10tix.getImageFromGallery();
-      final result = await Au10tix.sendF2F(imagePath!);
-
-   // Printing the request ID, keep it you will need it to poll for the result
-      print(result["beKit"]["requestID"].toString());
+   // The result will return a fail/success message
+      print(result["beKit"].toString());
 ```
 
 ## Support
