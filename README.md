@@ -22,6 +22,7 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
         - [PFL Status Codes](#pfl-status-codes)
     - [UI Component Implementation](#ui-component-implementation)
       - [UI Configurations](#ui-configurations)
+      - [Asset Management](#asset-management-ios-only)
     - [Au10tixCameraView Usage](#au10tixcameraview-usage)
     - [Backend Integration](#backend-integration)
   - [Support](#support)
@@ -405,6 +406,28 @@ For each of the start methods above you can pass a uiConfig parameter like this:
 ```
 
 The default value for all the fields is true unless changed.
+
+#### Asset Management (iOS only)
+
+The default configuration for asset loading in iOS is from the server, this means that to keep the SDK light weight the assets (including fonts) are downloaded from the server when the SDK is prepared. The alternative, to reduce dependency on network quality, is to bundle the assets with the application. It is recommended to leave the default configuration, however, if you chose to bundle the assets you will need to do the following:
+
+1. Request the iOS Assets Catalog from Support.
+2. Remove any unused <i>.xcassets</i> folders.
+3. Open your project workspace in Xcode.
+4. Drag the Assets folder to the Runner folder.
+5. Check the following boxes:
+   ![](misc/assets_addition.png)
+6. Open the <i>AppDelegate.swift</i> file and add the following code:
+
+```swift
+import Au10tixCore
+...
+Au10tix.shared.assetsManagerConfigurations.assetsSource = .bundle(.main)
+```
+
+See the full code here (look for the commented code): [AppDelegate.swift](https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/ios/Runner/AppDelegate.swift)
+
+Read more about iOS asset management in the [iOS documentation](https://documentation.au10tixservices.com/mobile-sdk/ios/sdk-implementation-guide/ui-comps/overview/#ui-assets).
 
 ### Au10tixCameraView Usage
 

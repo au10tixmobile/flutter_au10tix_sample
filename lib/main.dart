@@ -45,7 +45,6 @@ class HomePage extends StatelessWidget {
   bool _showPrimaryBtn = true;
   bool _showUploadBtn = true;
   bool _showIntro = true;
-  bool _isF2F = false;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -93,7 +92,6 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _startPFLUI() async {
-    print("isF2f = $_isF2F");
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
