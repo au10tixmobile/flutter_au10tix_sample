@@ -1,2 +1,37 @@
-const String workflowResponse =
-    '{"sessionId":"943302A11AF7433E89E7ECF7A00A96C8","response":{"session":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImF1MTB0aXgtc2Vzc2lvbiJ9.eyJhdWQiOiJBdTEwdGl4LmNvbSIsInN1YiI6IkF1MTB0aXhTZXNzaW9uIiwic2Vzc2lvbklkIjoiOTQzMzAyQTExQUY3NDMzRTg5RTdFQ0Y3QTAwQTk2QzgiLCJvcmdhbml6YXRpb25JZCI6IjQ3OCIsImlhdCI6MTcwOTY0OTY1NCwiZXhwIjoxNzA5NjUzMjU0fQ.JfxpFWNn0wUtDY1UAzndLvkU4HnuPTzgvlD2ITYbZItEIrH8cDcx6jBC0_kGKaaQ6n05i1F3QUktDdqeeEhtMzLoU7EQ5jkmP6dxDVWSvYHrpYMwNU5gZ6a6GkN4GDxy_WcamUgNCCuBGcpTap5Ecw6MS05fOdil3MQv6aFXz-9YrhoFq3D54R9pNxtpqzZfPsC2NxvnPt1_zM0W2l4IsuNXgtfDCjLIav_rRLCqFgu9v06n0AbXMkt8tAjfT1mnDHIKnKzhvMDaxZrRXrm3N3gumaVZoGlTnrIc_s_G6TPHHe6-Yj9dpijd1S03VAuqgYnIliro0iySHgexv8uOYA","accessToken":"eyJraWQiOiJ1Z3drcXd2V2lqUUoyZ1FrcTVjTlEyV0hKb0JPRzZaVk0xRENrZnZwbHhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULldGbkE2T1lIbnVRTTJUNzFYb21FNVJqckxWTFZHMmgydE10aUx6cVV0ZHMiLCJpc3MiOiJodHRwczovL2xvZ2luLmF1MTB0aXguY29tL29hdXRoMi9hdXMzbWx0czVzYmU5V0Q4VjM1NyIsImF1ZCI6ImF1MTB0aXgiLCJpYXQiOjE3MDk2NDk2NTQsImV4cCI6MTcwOTY1MzI1NCwiY2lkIjoiMG9hOW5wdmxyOVduWWVaY2gzNTciLCJzY3AiOlsib2NzL3Njb3BlOm1vYmlsZXNkayIsIm9jcy9zY29wZTpzaGFyZWQiLCJzZGMiLCJwcnMiLCJkb2NyZXBsYXkiLCJwZmwiLCJvY3Mvc2NvcGU6c2VjdXJlbWUiLCJ1c2VyTWFuYWdlbWVudCIsInBheW1lbnRDYXJkRGF0YSIsIm9jciIsIm1lZGlhIiwiZmVjIiwib2NzL3Njb3BlOm1vYmlsZWRlbW8iLCJtb2JpbGVzZGsiLCJoZWxtZXRzIiwid29ya2Zsb3c6YmVnaW5Qcm9jZXNzaW5nIl0sInN1YiI6IjBvYTlucHZscjlXblllWmNoMzU3IiwiYXBpVXJsIjoiaHR0cHM6Ly9hcGktd2V1LmF1MTB0aXhzZXJ2aWNlc3FhLmNvbSIsImJvc1VybCI6Imh0dHBzOi8vYm9zLXdlYi5hdTEwdGl4c2VydmljZXNxYS5jb20iLCJjbGllbnRPcmdhbml6YXRpb25OYW1lIjoiRGV2X1Rlc3QiLCJjbGllbnRPcmdhbml6YXRpb25JZCI6NDc4fQ.RZtv6eNNBupdA-fRJWm-lBOc0gu40zi2RZfgw4O0LC_LPooAC_Djcgbq4udF9flFmQ7byGwWK5ofY3NX0rI1WRWFEfOeo9mkfazPmLiKrQEL3ph77KPfme0QEgLmVffXDwrJrd5rtgwkXrYk2rJxURNXGxQZ26vtimkjplSZx02SF288peyArp3vAVi7UvtZ8PtGaZEPw5UrKJzB1KlGff_2F4cWImLlCWokgGMuO4MkBu59ZEEISxx7ZcHYiPUVctBDMCAMKjLR7GmiV0gWONU09JVlrTJrLVk3mmBjM4sGINsHWQGok_LSl9NDJIHUH5Rw4jof86fcI-xnN4SxRw","assets":[{"assetId":"10233043","createdAt":"2024-03-05T14:40:55.107Z","status":"created","type":"page0","mimeType":null,"deleted":false,"attachments":[],"sanitizationStatus":"pending","sasTokenUri":"https://mediasaqa.blob.core.windows.net/ms-478/943302A11AF7433E89E7ECF7A00A96C8/input/943302A11AF7433E89E7ECF7A00A96C8_page0?sv=2021-06-08&spr=https&st=2024-03-05T14%3A39%3A55Z&se=2024-03-05T14%3A50%3A55Z&sr=b&sp=rcw&sig=8slSnCJarTgltsQLNemgyjDmTGOdUIriyuQZDseSqgM%3D","processedBy":"original"},{"assetId":"10233044","createdAt":"2024-03-05T14:40:55.107Z","status":"created","type":"page1","mimeType":null,"deleted":false,"attachments":[],"sanitizationStatus":"pending","sasTokenUri":"https://mediasaqa.blob.core.windows.net/ms-478/943302A11AF7433E89E7ECF7A00A96C8/input/943302A11AF7433E89E7ECF7A00A96C8_page1?sv=2021-06-08&spr=https&st=2024-03-05T14%3A39%3A55Z&se=2024-03-05T14%3A50%3A55Z&sr=b&sp=rcw&sig=fGD7b%2BiXQXJbunHVdzjGX%2Bhd5Ts6oj84uPsebNlQQuM%3D","processedBy":"original"}]},"statusCode":200}';
+const String workflowResponse = '<your_workflow_response>';
+// Replace the placeholder above with the workflow response you recevie in raw form, in pretty for it should look something like this:
+
+// {
+//     "sessionId": "E402C4EF6FCD4716AB2185XXXXXXXX",
+//     "response": {
+//         "session": "eyJhbGciOiJSUzI1NiIsIXXXXXXXX",
+//         "accessToken": "eyJraWQiOiJ1Z3drcXXXXXXXX",
+//         "assets": [
+//             {
+//                 "assetId": "XXXXXXXX",
+//                 "createdAt": "2024-03-11T17:08:27.937Z",
+//                 "status": "created",
+//                 "type": "page0",
+//                 "mimeType": null,
+//                 "deleted": false,
+//                 "attachments": [],
+//                 "sanitizationStatus": "pending",
+//                 "sasTokenUri": "https://XXXXXXXX",
+//                 "processedBy": "original"
+//             },
+//             {
+//                 "assetId": "XXXXXXXX",
+//                 "createdAt": "2024-03-11T17:08:27.937Z",
+//                 "status": "created",
+//                 "type": "page1",
+//                 "mimeType": null,
+//                 "deleted": false,
+//                 "attachments": [],
+//                 "sanitizationStatus": "pending",
+//                 "sasTokenUri": "https://XXXXXXXX",
+//                 "processedBy": "original"
+//             }
+//         ]
+//     },
+//     "statusCode": 200
+// }
