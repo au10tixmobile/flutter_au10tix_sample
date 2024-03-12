@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_au10tix_sample/flow_toggle_button_widget.dart';
+import 'package:flutter_au10tix_sample/constants.dart';
 import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
 import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
@@ -11,7 +11,6 @@ import 'package:sdk_core_flutter/ui_config.dart';
 import './pfl_page.dart';
 import './sdc_page.dart';
 import './poa_page.dart';
-import './personal_data_dialog.dart';
 import 'ui_toggle_button_widget.dart';
 
 void main() {
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Au10tix Flutter PFL Demo',
+      title: 'Au10tix Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -39,14 +38,13 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  static const String _authToken = '<your_jwt>';
+  static const String _authToken = workflowResponse;
 
   var _sdcUIResult;
   bool _showCloseBtn = true;
   bool _showPrimaryBtn = true;
   bool _showUploadBtn = true;
   bool _showIntro = true;
-  bool _isF2F = false;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -60,9 +58,9 @@ class HomePage extends StatelessWidget {
     } catch (error) {}
   }
 
-  Future<void> _sendIDV(BuildContext context) async {
+  Future<void> _processWorkflow(BuildContext context) async {
     try {
-      final result = await Au10tix.sendIDV();
+      final result = await Au10tix.sendWorkflowRequest();
       if (result.containsKey("beKit")) {
         _showToast(context, result["beKit"].toString(), Colors.green);
         print(result["beKit"].toString());
@@ -71,37 +69,6 @@ class HomePage extends StatelessWidget {
       _showToast(context, error.message!, Colors.red);
       // ignore: empty_catches
     } catch (error) {}
-  }
-
-  Future<void> _sendF2F(BuildContext context) async {
-    final String? imagePath = await Au10tix.getImageFromGallery();
-    try {
-      final result = await Au10tix.sendF2F(imagePath!);
-      if (result.containsKey("beKit")) {
-        _showToast(context, result["beKit"].toString(), Colors.green);
-      }
-    } on PlatformException catch (error) {
-      _showToast(context, error.message!, Colors.red);
-      // ignore: empty_catches
-    } catch (error) {}
-  }
-
-  Future<void> _sendPOA(BuildContext context, String firstName, String lastName,
-      String address) async {
-    try {
-      final result = await Au10tix.sendPOA(firstName, lastName, address);
-      if (result.containsKey("beKit")) {
-        _showToast(context, result["beKit"].toString(), Colors.green);
-      }
-    } on PlatformException catch (error) {
-      _showToast(context, error.message!, Colors.red);
-      // ignore: empty_catches
-    } catch (error) {}
-  }
-
-  void handleContinue(
-      String firstName, String lastName, String address, BuildContext context) {
-    _sendPOA(context, firstName, lastName, address);
   }
 
   Future<void> _startSDCUI({bool isFrontSide = true}) async {
@@ -125,7 +92,6 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _startPFLUI() async {
-    print("isF2f = $_isF2F");
     try {
       //UI config is optional
       UIConfig uiConfig = UIConfig(
@@ -133,8 +99,7 @@ class HomePage extends StatelessWidget {
         showCloseButton: _showCloseBtn,
         showPrimaryButton: _showPrimaryBtn,
       );
-      final result =
-          await SdkPflFlutter.startPFLUI(uiConfig: uiConfig, isF2F: _isF2F);
+      final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
       if (kDebugMode) {
         print(result.toString());
       }
@@ -182,7 +147,6 @@ class HomePage extends StatelessWidget {
   }
 
   void onUIToggleButtonChanged(int index, bool isSelected) {
-    print("$index is selected $isSelected");
     switch (index) {
       case 0:
         _showCloseBtn = isSelected;
@@ -195,18 +159,6 @@ class HomePage extends StatelessWidget {
         break;
       case 3:
         _showIntro = isSelected;
-        break;
-      default:
-        break;
-    }
-  }
-
-  void onFlowToggleButtonChanged(int index, bool isSelected) {
-    print("$index is selected $isSelected");
-
-    switch (index) {
-      case 0:
-        _isF2F = !isSelected;
         break;
       default:
         break;
@@ -230,20 +182,17 @@ class HomePage extends StatelessWidget {
                   onPressed: () => _prepareSDK(context),
                   child: const Text("Prepare SDK"),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FlowToggleButtonsWidget(
-                    onToggle: onFlowToggleButtonChanged,
-                  ),
-                ),
               ],
             ),
-            const Divider(
-              height: 20,
-              thickness: 3,
-              indent: 20,
-              endIndent: 20,
-              color: Colors.black,
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Divider(
+                height: 20,
+                thickness: 3,
+                indent: 20,
+                endIndent: 20,
+                color: Colors.black,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -277,17 +226,14 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const Divider(
-              height: 20,
-              thickness: 3,
-              indent: 20,
-              endIndent: 20,
-              color: Colors.black,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: UIToggleButtonsWidget(
-                onToggle: onUIToggleButtonChanged,
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Divider(
+                height: 20,
+                thickness: 3,
+                indent: 20,
+                endIndent: 20,
+                color: Colors.black,
               ),
             ),
             Row(
@@ -316,40 +262,28 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const Divider(
-              height: 20,
-              thickness: 3,
-              indent: 20,
-              endIndent: 20,
-              color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+              child: UIToggleButtonsWidget(
+                onToggle: onUIToggleButtonChanged,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Divider(
+                height: 20,
+                thickness: 3,
+                indent: 20,
+                endIndent: 20,
+                color: Colors.black,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () => _sendIDV(context),
-                  child: const Text("Send IDV Request"),
-                ),
-                ElevatedButton(
-                  onPressed: () => _sendF2F(context),
-                  child: const Text("Send F2F Request"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => {
-                    showDialog(
-                      context: context,
-                      builder: (context) => WillPopScope(
-                        onWillPop: () async => false,
-                        child: PersonalDataDialog(onContinue: handleContinue),
-                      ),
-                    )
-                  },
-                  child: const Text("Send POA Request"),
+                  onPressed: () => _processWorkflow(context),
+                  child: const Text("Process Workflow"),
                 ),
                 ElevatedButton(
                   onPressed: () => _sendFEC(context),

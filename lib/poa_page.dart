@@ -85,8 +85,12 @@ class _POAPageState extends State<POAPage> {
                     ),
               _hasResult == null
                   ? StreamBuilder<String>(
-                      stream: SdkSdcFlutter.streamSdkUpdates().map(
-                          (event) => SdkSdcFlutter.getPOATextUpdates(event)),
+                      stream: SdkSdcFlutter.streamSdkUpdates().map((event) {
+                        if (event.containsKey('Warning')) {
+                          print("Warning ${event['Warning']['message']}");
+                        }
+                        return SdkSdcFlutter.getPOATextUpdates(event);
+                      }),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return StatusLabel(snapshot.data!);
