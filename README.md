@@ -15,15 +15,15 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
     - [Permissions](#permissions)
   - [Usage](#usage)
     - [Preparing the SDK](#preparing-the-sdk)
-    - [Custom UI Implementation](#custom-ui-implementation)
-      - [Smart Document Capture (SDC) & Proof of Address (POA)](#smart-document-capture-sdc--proof-of-address-poa)
-        - [Front End Classification (FEC)](#front-end-classification-fec)
-      - [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
-        - [PFL Status Codes](#pfl-status-codes)
     - [UI Component Implementation](#ui-component-implementation)
       - [UI Configurations](#ui-configurations)
       - [Asset Management](#asset-management-ios-only)
-    - [Au10tixCameraView Usage](#au10tixcameraview-usage)
+    - [Custom UI Implementation](#custom-ui-implementation)
+      - [Smart Document Capture (SDC) & Proof of Address (POA)](#smart-document-capture-sdc--proof-of-address-poa)
+      - [Passive Face Liveness (PFL)](#passive-face-liveness-pfl)
+        - [PFL Status Codes](#pfl-status-codes)
+      - [Au10tixCameraView Usage](#au10tixcameraview-usage)
+    - [Front End Classification (FEC)](#front-end-classification-fec)
     - [Backend Integration](#backend-integration)
   - [Support](#support)
     - [Contact](#contact)
@@ -45,7 +45,11 @@ Tested with channel stable 3.16.5.
 
 ### Prerequisite
 
-Before getting started, make sure you are setup on GitHub with our native SDK and have all the necessary credentials. If you need assistance, please contact AU10TIX support.
+Before getting started, make sure you are setup on GitHub with our native SDK and have all the necessary credentials. You can find the relevant documentation for that here:
+[Click here for Android](https://documentation.au10tixservices.com/mobile-sdk/android/sdk-implementation-guide/introduction/#integrating-the-sdk-to-your-android-project).
+[Click here for iOS](https://documentation.au10tixservices.com/mobile-sdk/ios/sdk-implementation-guide/introduction/#integrating-the-sdk-to-your-ios-project).
+
+If you need assistance, please contact AU10TIX support.
 
 ### AU10TIX SDK Setup
 
@@ -126,13 +130,78 @@ Follow the guide in the plugin to add the permissions above.
    Au10tix.init(<workflowResponse>);
    ```
 
-   The workflow response object is the response you get when making a workflow request with Au10tix, for instance Au10tix101. An example of the response object can be found https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/lib/constants.dart.
+   The workflow response object is the response you get when making a workflow request with Au10tix, for instance Au10tix101. An example of the response object can be found [here](https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/lib/constants.dart), and documentation on Authentication with Au10tix can be found [here](https://documentation.au10tixservices.com/getting-started/authentication/).
 
-1. As the `init` function is of type `Future<Map<dynamic, dynamic>>` if you would like to parse the session ID from the result, do this as follows (remember to add `await`):
+1. Use the `init` method asychronously with `await`, surounded by try/catch. If you receive a `PlatformException` in the catch it means the preperation of the SDK has failed, otherwise it succeeded. In either case you can parse the message like this:
 
    ```dart
    result['init']
    ```
+
+### UI Component Implementation
+
+To start the UI components for SDC, POA and PFL add the following code:
+
+```dart
+//PFL
+final result = await SdkPflFlutter.startPFLUI();
+
+//SDC
+final result = await SdkPflFlutter.startSDCUI();
+//optional parameter isFront: false for backside
+
+//POA
+final result = await SdkPflFlutter.startPOAUI();
+```
+
+The result will arrive after the user clicks approve.
+
+```dart
+    final featureName = 'sdc' // or 'pfl', 'poa'
+    final status = result[featureName]['status']
+    final imagePath = result[featureName]['imagePath']
+    final croppedImagePath = result[featureName]['croppedFilePath']
+```
+
+See the sample app for a clean implementation.
+
+#### UI Configurations
+
+For each of the start methods above you can pass a uiConfig parameter like this:
+
+```dart
+      UIConfig uiConfig = UIConfig(
+          showIntroScreen: true, // show/hide the intro screen
+          showCloseButton: true, // show/hide the close button
+          showPrimaryButton: true, // show/hide the capture button
+          canUpload: true); // show/hide the upload option button
+
+      sdcUIResult = await SdkSdcFlutter.startSDCUI(uiConfig: uiConfig);
+```
+
+The default value for all the fields is true unless changed.
+
+#### Asset Management (iOS only)
+
+The default configuration for asset loading in iOS is from the server, this means that to keep the SDK light weight the assets (including fonts) are downloaded from the server when the SDK is prepared. The alternative, to reduce dependency on network quality, is to bundle the assets with the application. It is recommended to leave the default configuration, however, if you chose to bundle the assets you will need to do the following:
+
+1. Request the iOS Assets Catalog from Support.
+2. Remove any unused <i>.xcassets</i> folders.
+3. Open your project workspace in Xcode.
+4. Drag the Assets folder to the Runner folder.
+5. Check the following boxes:
+   ![](misc/assets_addition.png)
+6. Open the <i>AppDelegate.swift</i> file and add the following code:
+
+```swift
+import Au10tixCore
+...
+Au10tix.shared.assetsManagerConfigurations.assetsSource = .bundle(.main)
+```
+
+See the full code here (look for the commented code): [AppDelegate.swift](https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/ios/Runner/AppDelegate.swift)
+
+Read more about iOS asset management in the [iOS documentation](https://documentation.au10tixservices.com/mobile-sdk/ios/sdk-implementation-guide/ui-comps/overview/#ui-assets).
 
 ### Custom UI Implementation
 
@@ -238,23 +307,6 @@ Now that the session is ready, we can start the SDC feature:
    ```
 
    This method uses the Flutter `image_picker` plugin to show the gallery. Once an image is selected, it is processed and a result is returned.
-
-##### Front End Classification (FEC)
-
-Using the SDC plugin you have the option of sending the captured image to the FEC service.
-
-1. To send the image to the service use the following command:
-
-```dart
-final result =
-          await SdkSdcFlutter.performFEC(sdcResult['sdc']['croppedFilePath']);
-```
-
-1. To parse the result:
-
-```dart
-final classificationResult = result["fec"]["classificationResult"]
-```
 
 #### Passive Face Liveness (PFL)
 
@@ -364,72 +416,7 @@ static const int ERROR_INVALID_META = 329;
 static const int ERROR_UNKNOWN = 330;
 ```
 
-### UI Component Implementation
-
-To start the UI components for SDC and PFL add the following code:
-
-```dart
-//PFL
-final result = await SdkPflFlutter.startPFLUI();
-
-//SDC
-final result = await SdkPflFlutter.startSDCUI();
-//isFront: false for backside
-
-//POA
-final result = await SdkPflFlutter.startPOAUI();
-```
-
-The result will arrive after the user clicks approve.
-
-```dart
-    final featureName = 'sdc' // or 'pfl', 'poa'
-    final status = result[featureName]['status']
-    final imagePath = result[featureName]['imagePath']
-    final croppedImagePath = result[featureName]['croppedFilePath']
-```
-
-See the sample app for a clean implementation.
-
-#### UI Configurations
-
-For each of the start methods above you can pass a uiConfig parameter like this:
-
-```dart
-      UIConfig uiConfig = UIConfig(
-          showIntroScreen: true, // show/hide the intro screen
-          showCloseButton: true, // show/hide the close button
-          showPrimaryButton: true, // show/hide the capture button
-          canUpload: true); // show/hide the upload option button
-
-      sdcUIResult = await SdkSdcFlutter.startSDCUI(uiConfig: uiConfig);
-```
-
-The default value for all the fields is true unless changed.
-
-#### Asset Management (iOS only)
-
-The default configuration for asset loading in iOS is from the server, this means that to keep the SDK light weight the assets (including fonts) are downloaded from the server when the SDK is prepared. The alternative, to reduce dependency on network quality, is to bundle the assets with the application. It is recommended to leave the default configuration, however, if you chose to bundle the assets you will need to do the following:
-
-1. Request the iOS Assets Catalog from Support.
-2. Remove any unused <i>.xcassets</i> folders.
-3. Open your project workspace in Xcode.
-4. Drag the Assets folder to the Runner folder.
-5. Check the following boxes:
-   ![](misc/assets_addition.png)
-6. Open the <i>AppDelegate.swift</i> file and add the following code:
-
-```swift
-import Au10tixCore
-...
-Au10tix.shared.assetsManagerConfigurations.assetsSource = .bundle(.main)
-```
-
-See the full code here (look for the commented code): [AppDelegate.swift](https://github.com/au10tixmobile/flutter_au10tix_sample/blob/main/ios/Runner/AppDelegate.swift)
-
-Read more about iOS asset management in the [iOS documentation](https://documentation.au10tixservices.com/mobile-sdk/ios/sdk-implementation-guide/ui-comps/overview/#ui-assets).
-
-### Au10tixCameraView Usage
+#### Au10tixCameraView Usage
 
 1. To use the view import the `Au10tixCameraView` widget:
 
@@ -456,6 +443,23 @@ Read more about iOS asset management in the [iOS documentation](https://document
 
    - `width` & `height` which allow you to pass values for the width and height of the camera, although it is recommended to use the default values which will result in the view capturing 3/4 of the screen.
    - `withOverlay` & `overlayColor` are used to start the camera view with an overlay over it. There's a bug in the current Flutter's AndroidViewSurface when it comes to supporting camera in a view which results in a weird affect of the background disappearing a second before the camera preview is shown. To avoid that there's the option of starting the view with the overlay which is removed after the frames start showing. This doesn't always occur and/or is not always noticable. Feel free to try it and decide for yourself whether or not to use it.
+
+### Front End Classification (FEC)
+
+Using the SDC plugin you have the option of sending the captured image to the FEC service.
+
+1. To send the image to the service use the following command (in this example we are using the image from the sdc result):
+
+```dart
+final result =
+          await SdkSdcFlutter.performFEC(sdcResult['sdc']['croppedFilePath']);
+```
+
+1. To parse the result:
+
+```dart
+final classificationResult = result["fec"]["classificationResult"]
+```
 
 ### Backend Integration
 

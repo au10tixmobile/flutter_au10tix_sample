@@ -315,23 +315,26 @@ packages:
   sdk_core_flutter:
     dependency: transitive
     description:
-      path: "/Users/shai.herman/Documents/Development/Repos/Flutter/sdk_core_flutter"
-      relative: false
-    source: path
+      name: sdk_core_flutter
+      sha256: "107aef62a6806f970c2e64729ae9feed72a78a333d8f3ebaa17b881a8afb23e4"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.0.0"
   sdk_pfl_flutter:
     dependency: "direct main"
     description:
-      path: "/Users/shai.herman/Documents/Development/Repos/Flutter/sdk_pfl_flutter"
-      relative: false
-    source: path
+      name: sdk_pfl_flutter
+      sha256: "0edd8d8b0451c254d285c5a4827bf4d6635dfb96404a69f3bce7df712b834ffc"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.0.0"
   sdk_sdc_flutter:
     dependency: "direct main"
     description:
-      path: "/Users/shai.herman/Documents/Development/Repos/Flutter/sdk_sdc_flutter"
-      relative: false
-    source: path
+      name: sdk_sdc_flutter
+      sha256: "59c65341915a5e5349522f257bbdc3f742a991be085b23f970e5ec64090b5888"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.0.0"
   sky_engine:
     dependency: transitive

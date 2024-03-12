@@ -147,7 +147,6 @@ class HomePage extends StatelessWidget {
   }
 
   void onUIToggleButtonChanged(int index, bool isSelected) {
-    print("$index is selected $isSelected");
     switch (index) {
       case 0:
         _showCloseBtn = isSelected;
