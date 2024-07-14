@@ -43,10 +43,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutter_au10tix_sample"
+        namespace "com.example.flutter_au10tix_sample"
         minSdkVersion 22
-        targetSdkVersion 33
-        compileSdkVersion 33
+        targetSdkVersion 34
+        compileSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

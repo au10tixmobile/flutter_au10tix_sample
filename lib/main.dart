@@ -1,5 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:convert';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
@@ -45,6 +48,8 @@ class HomePage extends StatelessWidget {
   bool _showPrimaryBtn = true;
   bool _showUploadBtn = true;
   bool _showIntro = true;
+
+  bool _isF2F = false;
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
@@ -99,7 +104,8 @@ class HomePage extends StatelessWidget {
         showCloseButton: _showCloseBtn,
         showPrimaryButton: _showPrimaryBtn,
       );
-      final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
+      final result =
+          await SdkPflFlutter.startPFLUI(uiConfig: uiConfig, isF2F: _isF2F);
       if (kDebugMode) {
         print(result.toString());
       }
@@ -181,6 +187,10 @@ class HomePage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => _prepareSDK(context),
                   child: const Text("Prepare SDK"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _uploadFaceForCompare(),
+                  child: const Text("F2F Image Upload"),
                 ),
               ],
             ),
@@ -295,6 +305,47 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _uploadFaceForCompare() async {
+    _isF2F = true;
+    final imagePath = await Au10tix.getImageFromGallery();
+    print(imagePath);
+    final Map<String, dynamic> jsonData = json.decode(_authToken);
+    final List<dynamic> assets = jsonData['response']['assets'];
+
+    final asset = assets.firstWhere((asset) => asset['type'] == 'ff2');
+    final sasToken = asset['sasTokenUri'];
+    uploadFile(sasToken, imagePath!);
+  }
+
+  Future<void> uploadFile(String? sasToken, String filePath) async {
+    if (sasToken == null) {
+      return;
+    }
+
+    try {
+      final File file = File(filePath);
+      final int fileLength = await file.length();
+      final Stream<List<int>> fileStream = file.openRead();
+
+      final dio = Dio();
+      final response = await dio.put(
+        sasToken,
+        data: fileStream,
+        options: Options(
+          headers: {
+            'x-ms-blob-type': 'BlockBlob',
+            'Content-Length': fileLength.toString(),
+            'Content-Type': 'application/octet-stream',
+          },
+        ),
+      );
+
+      print('uploadFile response code: ${response.statusCode}');
+    } catch (e) {
+      print('Error uploading file: $e');
+    }
   }
 }
 
