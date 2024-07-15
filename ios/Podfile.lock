@@ -1,26 +1,26 @@
 PODS:
-  - Au10tixBaseUI (4.0.0):
+  - Au10tixBaseUI (4.2.0):
     - Au10tixCore
-  - Au10tixCore (4.0.0)
-  - Au10tixDetectorManager (4.0.0):
+  - Au10tixCore (4.2.0)
+  - Au10tixDetectorManager (4.2.0):
     - Au10tixCore
-  - Au10tixPassiveFaceLivenessKit (4.0.0):
+  - Au10tixPassiveFaceLivenessKit (4.2.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixPassiveFaceLivenessUI (4.0.0):
+  - Au10tixPassiveFaceLivenessUI (4.2.0):
     - Au10tixBaseUI
     - Au10tixPassiveFaceLivenessKit
-  - Au10tixProofOfAddressUI (4.0.0):
+  - Au10tixProofOfAddressUI (4.2.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSmartDocumentCaptureKit (4.0.0):
+  - Au10tixSmartDocumentCaptureKit (4.2.0):
     - Au10tixCore
     - Au10tixSourceManager
-  - Au10tixSmartDocumentCaptureUI (4.0.0):
+  - Au10tixSmartDocumentCaptureUI (4.2.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSourceManager (4.0.0):
+  - Au10tixSourceManager (4.2.0):
     - Au10tixCore
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
@@ -28,20 +28,20 @@ PODS:
   - permission_handler_apple (9.1.1):
     - Flutter
   - sdk_core_flutter (0.0.1):
-    - Au10tixBaseUI (= 4.0.0)
-    - Au10tixCore (= 4.0.0)
-    - Au10tixDetectorManager (= 4.0.0)
-    - Au10tixSourceManager (= 4.0.0)
+    - Au10tixBaseUI (= 4.2.0)
+    - Au10tixCore (= 4.2.0)
+    - Au10tixDetectorManager (= 4.2.0)
+    - Au10tixSourceManager (= 4.2.0)
     - Flutter
   - sdk_pfl_flutter (0.0.1):
-    - Au10tixPassiveFaceLivenessKit (= 4.0.0)
-    - Au10tixPassiveFaceLivenessUI (= 4.0.0)
+    - Au10tixPassiveFaceLivenessKit (= 4.2.0)
+    - Au10tixPassiveFaceLivenessUI (= 4.2.0)
     - Flutter
     - sdk_core_flutter
   - sdk_sdc_flutter (0.0.1):
-    - Au10tixProofOfAddressUI (= 4.0.0)
-    - Au10tixSmartDocumentCaptureKit (= 4.0.0)
-    - Au10tixSmartDocumentCaptureUI (= 4.0.0)
+    - Au10tixProofOfAddressUI (= 4.2.0)
+    - Au10tixSmartDocumentCaptureKit (= 4.2.0)
+    - Au10tixSmartDocumentCaptureUI (= 4.2.0)
     - Flutter
     - sdk_core_flutter
 
@@ -80,21 +80,21 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
 
 SPEC CHECKSUMS:
-  Au10tixBaseUI: c4e56ad68636b52c18c649579638e4bbdcc9ced3
-  Au10tixCore: 182d69835a945991bdc5a4f2ecd8e819ea59bb6c
-  Au10tixDetectorManager: e3d853b330042259b58cf64f88a72c898f0ca252
-  Au10tixPassiveFaceLivenessKit: 359722f4b00c2207aa858aa91db656a5967b05b3
-  Au10tixPassiveFaceLivenessUI: 026fe75bf21af6c30b42f8dede2284db9e400ae8
-  Au10tixProofOfAddressUI: bb92fa9f36961d02a4345724ac5c4d33a03d5536
-  Au10tixSmartDocumentCaptureKit: 982df0d2346235b6b22b3ac3dded1f1c4a6447ab
-  Au10tixSmartDocumentCaptureUI: 307fef7533ddb9cbe83ac0712e9b580bb4d99872
-  Au10tixSourceManager: 6798baa10d04bfb59c6ad0a792063568b96219c9
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  Au10tixBaseUI: d272ec216f5e01a4d60e882047748dac190c3687
+  Au10tixCore: 66778a02645f329dee03c92bd8f47c067c8d5762
+  Au10tixDetectorManager: 1c87a88b84e7c2d7809e5feffeaba6ca021d11c1
+  Au10tixPassiveFaceLivenessKit: 93aef90217824d5f12b6a461a43ff19971eef91d
+  Au10tixPassiveFaceLivenessUI: 021e2fa3de3c2dc601a35c29eef47500c7b2f28b
+  Au10tixProofOfAddressUI: d6f68790ace57f5efcee7659c5043ff30d0c0f6e
+  Au10tixSmartDocumentCaptureKit: d9ba1f478fd37677799ea6b1cc8064dc6c4d593c
+  Au10tixSmartDocumentCaptureUI: d881dea25082981c2f03b8e4580e1d11ff4c85fe
+  Au10tixSourceManager: 37975a3a58d609f7e365467ebe743b9932ecf11e
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
-  sdk_core_flutter: b4b5653348b01542b3fa86bd6427e4987848e550
-  sdk_pfl_flutter: 24e9e469d9d454e13f8adc69aafe7ec6422c41b5
-  sdk_sdc_flutter: 60605196665477decb6e71d7a00a1fc135bd6911
+  sdk_core_flutter: 1435062fda2df343a23063ec7c09da992704ed99
+  sdk_pfl_flutter: 79b014720b58ec36856e58bc6f9af08ea75716cd
+  sdk_sdc_flutter: e1ef7ec6aa2cf3717840b609b55ae3785be32581
 
 PODFILE CHECKSUM: 8f7363fb8243a2ae318e66a6dac02af26dcde14f
 
