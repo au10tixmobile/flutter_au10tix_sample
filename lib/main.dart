@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  static const String _authToken = workflowResponse;
+  String _authToken = workflowResponse;
 
   var _sdcUIResult;
   bool _showCloseBtn = true;
@@ -53,6 +53,9 @@ class HomePage extends StatelessWidget {
 
   Future<void> _prepareSDK(BuildContext context) async {
     try {
+      if (_controller.text.isNotEmpty) {
+        _authToken = _controller.text;
+      }
       final result = await Au10tix.init(_authToken);
       if (result.containsKey("init")) {
         _showToast(context, result["init"].toString(), Colors.green);
@@ -171,6 +174,8 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,6 +186,22 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: TextField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Insert Workflow Response',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
