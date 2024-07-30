@@ -246,8 +246,9 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(PFLPage.routeName),
+                  onPressed: () => Navigator.of(context).pushNamed(
+                      PFLPage.routeName,
+                      arguments: {"isF2F": _isF2F}),
                   child: const Text("Start PFL"),
                 ),
                 ElevatedButton(

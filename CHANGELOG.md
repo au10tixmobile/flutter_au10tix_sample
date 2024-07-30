@@ -1,3 +1,9 @@
+## 2.1.0
+
+- Update Au10tix SDK support to 4.2.0 for Android and iOS.
+  - This version provides support (in addition to already supported Au10tix101 workflow) to Workflows: 34, 500, 502 and 510.
+- Support of Front End Classification (FEC) feature.
+
 ## 2.0.0
 
 - Update Au10tix SDK support to 4.0.0 for iOS, Android 4.0.0.
