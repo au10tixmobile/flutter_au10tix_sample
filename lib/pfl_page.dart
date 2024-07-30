@@ -19,6 +19,7 @@ class _PFLPageState extends State<PFLPage> {
   Map? _hasResult;
   Map? _hasValidation;
   String featureType = 'pfl';
+  var _isF2F = false;
 
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
@@ -52,7 +53,7 @@ class _PFLPageState extends State<PFLPage> {
   Future<void> _startPFL() async {
     if (await Permission.camera.request().isGranted) {
       try {
-        final result = await SdkPflFlutter.startPFL();
+        final result = await SdkPflFlutter.startPFL(isF2F: _isF2F);
         if (kDebugMode) {
           print(result.toString());
         }
@@ -67,6 +68,9 @@ class _PFLPageState extends State<PFLPage> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    _isF2F = arguments['isF2F'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('PFL Page'),

@@ -1,5 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:convert';
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  static const String _authToken = workflowResponse;
+  String _authToken = workflowResponse;
 
   var _sdcUIResult;
   bool _showCloseBtn = true;
@@ -46,8 +49,13 @@ class HomePage extends StatelessWidget {
   bool _showUploadBtn = true;
   bool _showIntro = true;
 
+  bool _isF2F = false;
+
   Future<void> _prepareSDK(BuildContext context) async {
     try {
+      if (_controller.text.isNotEmpty) {
+        _authToken = _controller.text;
+      }
       final result = await Au10tix.init(_authToken);
       if (result.containsKey("init")) {
         _showToast(context, result["init"].toString(), Colors.green);
@@ -99,7 +107,8 @@ class HomePage extends StatelessWidget {
         showCloseButton: _showCloseBtn,
         showPrimaryButton: _showPrimaryBtn,
       );
-      final result = await SdkPflFlutter.startPFLUI(uiConfig: uiConfig);
+      final result =
+          await SdkPflFlutter.startPFLUI(uiConfig: uiConfig, isF2F: _isF2F);
       if (kDebugMode) {
         print(result.toString());
       }
@@ -165,6 +174,8 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,11 +187,31 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: TextField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Insert Workflow Response',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () => _prepareSDK(context),
                   child: const Text("Prepare SDK"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _uploadFaceForCompare(),
+                  child: const Text("F2F Image Upload"),
                 ),
               ],
             ),
@@ -215,8 +246,9 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(PFLPage.routeName),
+                  onPressed: () => Navigator.of(context).pushNamed(
+                      PFLPage.routeName,
+                      arguments: {"isF2F": _isF2F}),
                   child: const Text("Start PFL"),
                 ),
                 ElevatedButton(
@@ -295,6 +327,47 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _uploadFaceForCompare() async {
+    _isF2F = true;
+    final imagePath = await Au10tix.getImageFromGallery();
+    print(imagePath);
+    final Map<String, dynamic> jsonData = json.decode(_authToken);
+    final List<dynamic> assets = jsonData['response']['assets'];
+
+    final asset = assets.firstWhere((asset) => asset['type'] == 'ff2');
+    final sasToken = asset['sasTokenUri'];
+    uploadFile(sasToken, imagePath!);
+  }
+
+  Future<void> uploadFile(String? sasToken, String filePath) async {
+    if (sasToken == null) {
+      return;
+    }
+
+    try {
+      final File file = File(filePath);
+      final int fileLength = await file.length();
+      final Stream<List<int>> fileStream = file.openRead();
+
+      final dio = Dio();
+      final response = await dio.put(
+        sasToken,
+        data: fileStream,
+        options: Options(
+          headers: {
+            'x-ms-blob-type': 'BlockBlob',
+            'Content-Length': fileLength.toString(),
+            'Content-Type': 'application/octet-stream',
+          },
+        ),
+      );
+
+      print('uploadFile response code: ${response.statusCode}');
+    } catch (e) {
+      print('Error uploading file: $e');
+    }
   }
 }
 
