@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_au10tix_sample/constants.dart';
+import './constants.dart';
 import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
 import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
@@ -16,12 +16,13 @@ import './sdc_page.dart';
 import './poa_page.dart';
 import 'ui_toggle_button_widget.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  String _authToken = workflowResponse;
+  String _authToken = '';
 
-  var _sdcUIResult;
+  dynamic _sdcUIResult;
   bool _showCloseBtn = true;
   bool _showPrimaryBtn = true;
   bool _showUploadBtn = true;
@@ -55,6 +56,8 @@ class HomePage extends StatelessWidget {
     try {
       if (_controller.text.isNotEmpty) {
         _authToken = _controller.text;
+      }else {
+        _authToken = workflowResponse();
       }
       final result = await Au10tix.init(_authToken);
       if (result.containsKey("init")) {
@@ -182,163 +185,235 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Au10tix Flutter Plugin Example App'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: TextField(
-                      controller: _controller,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Insert Workflow Response',
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Workflow Input Section
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Workflow Configuration',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      const SizedBox(height: 12),
+                      TextField(
+                        controller: _controller,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Insert Workflow Response',
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _prepareSDK(context),
+                              child: const Text("Prepare SDK"),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _uploadFaceForCompare(context),
+                              child: const Text("F2F Image Upload"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _prepareSDK(context),
-                  child: const Text("Prepare SDK"),
-                ),
-                ElevatedButton(
-                  onPressed: () => _uploadFaceForCompare(),
-                  child: const Text("F2F Image Upload"),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0),
-              child: Divider(
-                height: 20,
-                thickness: 3,
-                indent: 20,
-                endIndent: 20,
-                color: Colors.black,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed(
-                      SDCPage.routeName,
-                      arguments: {"isFrontSide": true}),
-                  child: const Text("Start SDC - Front"),
+              
+              const SizedBox(height: 24),
+              
+              // Navigation Section
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Navigation Pages',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.of(context).pushNamed(
+                                  SDCPage.routeName,
+                                  arguments: {"isFrontSide": true}),
+                              child: const Text("SDC - Front", textAlign: TextAlign.center),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.of(context).pushNamed(
+                                  SDCPage.routeName,
+                                  arguments: {"isFrontSide": false}),
+                              child: const Text("SDC - Back", textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.of(context).pushNamed(
+                                  PFLPage.routeName,
+                                  arguments: {"isF2F": _isF2F}),
+                              child: const Text("Start PFL", textAlign: TextAlign.center),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () =>
+                                  Navigator.of(context).pushNamed(POAPage.routeName),
+                              child: const Text("Start POA", textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed(
-                      SDCPage.routeName,
-                      arguments: {"isFrontSide": false}),
-                  child: const Text("Start SDC - Back"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed(
-                      PFLPage.routeName,
-                      arguments: {"isF2F": _isF2F}),
-                  child: const Text("Start PFL"),
-                ),
-                ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(POAPage.routeName),
-                  child: const Text("Start POA"),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0),
-              child: Divider(
-                height: 20,
-                thickness: 3,
-                indent: 20,
-                endIndent: 20,
-                color: Colors.black,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _startSDCUI(),
-                  child: const Text("Start SDC UI - Front"),
+              
+              const SizedBox(height: 24),
+              
+              // UI Components Section
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'UI Components',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _startSDCUI(),
+                              child: const Text("SDC UI - Front", textAlign: TextAlign.center),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _startSDCUI(isFrontSide: false),
+                              child: const Text("SDC UI - Back", textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _startPFLUI(),
+                              child: const Text("Start PFL UI", textAlign: TextAlign.center),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _startPOAUI(),
+                              child: const Text("Start POA UI", textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: UIToggleButtonsWidget(
+                          onToggle: onUIToggleButtonChanged,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () => _startSDCUI(isFrontSide: false),
-                  child: const Text("Start SDC UI - Back"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _startPFLUI(),
-                  child: const Text("Start PFL UI"),
-                ),
-                ElevatedButton(
-                  onPressed: () => _startPOAUI(),
-                  child: const Text("Start POA UI"),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-              child: UIToggleButtonsWidget(
-                onToggle: onUIToggleButtonChanged,
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0),
-              child: Divider(
-                height: 20,
-                thickness: 3,
-                indent: 20,
-                endIndent: 20,
-                color: Colors.black,
+              
+              const SizedBox(height: 24),
+              
+              // Actions Section
+              Card(
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Actions',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _processWorkflow(context),
+                              child: const Text("Process Workflow", textAlign: TextAlign.center),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () => _sendFEC(context),
+                              child: const Text("Send FEC Request", textAlign: TextAlign.center),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _processWorkflow(context),
-                  child: const Text("Process Workflow"),
-                ),
-                ElevatedButton(
-                  onPressed: () => _sendFEC(context),
-                  child: const Text("Send FEC Request"),
-                ),
-              ],
-            ),
-          ],
+              
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _uploadFaceForCompare() async {
+  _uploadFaceForCompare(BuildContext context) async {
     _isF2F = true;
     final imagePath = await Au10tix.getImageFromGallery();
-    print(imagePath);
-    final Map<String, dynamic> jsonData = json.decode(_authToken);
-    final List<dynamic> assets = jsonData['response']['assets'];
+    
+    await Au10tix.updatePhotoForComparison(imagePath!);
+    _showToast(
+        context,
+        'PROCEED WITH PFL',
+        Colors.green);
 
-    final asset = assets.firstWhere((asset) => asset['type'] == 'ff2');
-    final sasToken = asset['sasTokenUri'];
-    uploadFile(sasToken, imagePath!);
   }
 
   Future<void> uploadFile(String? sasToken, String filePath) async {

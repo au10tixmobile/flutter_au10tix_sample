@@ -2,7 +2,7 @@ import UIKit
 import Flutter
 //import Au10tixCore
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
     _ application: UIApplication,

@@ -3,25 +3,32 @@ import 'package:flutter/material.dart';
 class UIToggleButtonsWidget extends StatefulWidget {
   final Function(int, bool) onToggle;
 
-  const UIToggleButtonsWidget({Key? key, required this.onToggle})
-      : super(key: key);
+  const UIToggleButtonsWidget({super.key, required this.onToggle});
 
   @override
-  _UIToggleButtonsWidgetState createState() => _UIToggleButtonsWidgetState();
+  UIToggleButtonsWidgetState createState() => UIToggleButtonsWidgetState();
 }
 
-class _UIToggleButtonsWidgetState extends State<UIToggleButtonsWidget> {
+class UIToggleButtonsWidgetState extends State<UIToggleButtonsWidget> {
   static const List<List<String>> buttonTextsPair = [
-    ['SCloseBtn', 'HCloseBtn'],
-    ['SPrimaryBtn', 'HPrimaryBtn'],
-    ['SUploadBtn', 'HUploadBtn'],
-    ['SIntro', 'HIntro']
+    ['Show Close Button', 'Hide Close Button'],
+    ['Show Primary Button', 'Hide Primary Button'],
+    ['Show Upload Button', 'Hide Upload Button'],
+    ['Show Intro', 'Hide Intro']
   ];
   late final selected = List.generate(buttonTextsPair.length, (index) => true);
 
   @override
   Widget build(BuildContext context) {
     return ToggleButtons(
+      isSelected: selected,
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      onPressed: (index) {
+        setState(() {
+          selected[index] = !selected[index];
+          widget.onToggle(index, selected[index]); // Call the callback
+        });
+      },
       children: List.generate(
         buttonTextsPair.length,
         (index) {
@@ -34,14 +41,6 @@ class _UIToggleButtonsWidgetState extends State<UIToggleButtonsWidget> {
           );
         },
       ),
-      isSelected: selected,
-      borderRadius: const BorderRadius.all(Radius.circular(8)),
-      onPressed: (index) {
-        setState(() {
-          selected[index] = !selected[index];
-          widget.onToggle(index, selected[index]); // Call the callback
-        });
-      },
     );
   }
 }

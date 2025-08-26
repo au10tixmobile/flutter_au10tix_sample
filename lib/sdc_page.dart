@@ -17,6 +17,7 @@ class SDCPage extends StatefulWidget {
 
 class _SDCPageState extends State<SDCPage> {
   Map? _hasResult;
+
   var _isFrontSide = false;
   Future<void> _onCaptureClick() async {
     if (_hasResult != null) {}
@@ -79,15 +80,15 @@ class _SDCPageState extends State<SDCPage> {
             children: [
               _hasResult == null
                   ? Au10tixCameraView(
-                      featureHandlerFn: _startSDC,
-                      viewType: "au10tixCameraViewSDC",
-                    )
+                featureHandlerFn: _startSDC,
+                viewType: "au10tixCameraViewSDC",
+              )
                   : Image.file(
-                      File(_hasResult!['sdc']['imagePath']),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width / (3 / 4),
-                      fit: BoxFit.fitHeight,
-                    ),
+                File(_hasResult!['sdc']['imagePath']),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width / (3 / 4),
+                fit: BoxFit.fitHeight,
+              ),
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
@@ -99,17 +100,17 @@ class _SDCPageState extends State<SDCPage> {
               ),
               _hasResult == null
                   ? StreamBuilder<String>(
-                      stream: SdkSdcFlutter.streamSdkUpdates().map(
+                  stream: SdkSdcFlutter.streamSdkUpdates().map(
                           (event) => SdkSdcFlutter.getSDCTextUpdates(event)),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return StatusLabel(snapshot.data!);
-                        } else {
-                          return const Text('');
-                        }
-                      })
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return StatusLabel(snapshot.data!);
+                    } else {
+                      return const Text('');
+                    }
+                  })
                   : StatusLabel(
-                      SdkSdcFlutter.getSDCTextUpdates(_hasResult, true)),
+                  SdkSdcFlutter.getSDCTextUpdates(_hasResult, true)),
             ],
           ),
           Expanded(
@@ -128,14 +129,14 @@ class _SDCPageState extends State<SDCPage> {
                   onTap: _hasResult == null
                       ? _onCaptureClick
                       : _hasResult!['sdc']['status'] == 1
-                          ? _onApproveClicked
-                          : _onRefreshClicked,
+                      ? _onApproveClicked
+                      : _onRefreshClicked,
                   child: Image.asset(
                     _hasResult == null
                         ? 'assets/images/capture_btn.png'
                         : _hasResult!['sdc']['status'] == 1
-                            ? 'assets/images/approve_btn.png'
-                            : 'assets/images/refresh_btn.png',
+                        ? 'assets/images/approve_btn.png'
+                        : 'assets/images/refresh_btn.png',
                     fit: BoxFit.cover,
                   ),
                 ),

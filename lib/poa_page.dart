@@ -48,14 +48,14 @@ class _POAPageState extends State<POAPage> {
       try {
         final result = await SdkSdcFlutter.startPOA();
         if (kDebugMode) {
-          print(result.toString());
+          debugPrint(result.toString());
         }
         setState(() {
           _hasResult = result;
         });
       } on PlatformException catch (error) {
         if (kDebugMode) {
-          print(error.message);
+          debugPrint(error.message);
         }
       }
     }
@@ -87,7 +87,9 @@ class _POAPageState extends State<POAPage> {
                   ? StreamBuilder<String>(
                       stream: SdkSdcFlutter.streamSdkUpdates().map((event) {
                         if (event.containsKey('Warning')) {
-                          print("Warning ${event['Warning']['message']}");
+                          if (kDebugMode) {
+                            debugPrint("Warning ${event['Warning']['message']}");
+                          }
                         }
                         return SdkSdcFlutter.getPOATextUpdates(event);
                       }),
@@ -143,11 +145,16 @@ class _POAPageState extends State<POAPage> {
   }
 }
 
-class StatusLabel extends StatelessWidget {
-  String data;
+class StatusLabel extends StatefulWidget {
+  final String data;
 
-  StatusLabel(this.data);
+  const StatusLabel(this.data, {super.key});
 
+  @override
+  State<StatusLabel> createState() => _StatusLabelState();
+}
+
+class _StatusLabelState extends State<StatusLabel> {
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
@@ -159,7 +166,7 @@ class StatusLabel extends StatelessWidget {
             color: Colors.grey[800],
             padding: const EdgeInsets.all(5),
             child: Text(
-              data,
+              widget.data,
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.white,

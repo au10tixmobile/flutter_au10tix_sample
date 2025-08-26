@@ -1,47 +1,47 @@
 PODS:
-  - Au10tixBaseUI (4.2.0):
+  - Au10tixBaseUI (4.5.0):
     - Au10tixCore
-  - Au10tixCore (4.2.0)
-  - Au10tixDetectorManager (4.2.0):
+  - Au10tixCore (4.5.0)
+  - Au10tixDetectorManager (4.5.0):
     - Au10tixCore
-  - Au10tixPassiveFaceLivenessKit (4.2.0):
+  - Au10tixPassiveFaceLivenessKit (4.5.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixPassiveFaceLivenessUI (4.2.0):
+  - Au10tixPassiveFaceLivenessUI (4.5.0):
     - Au10tixBaseUI
     - Au10tixPassiveFaceLivenessKit
-  - Au10tixProofOfAddressUI (4.2.0):
+  - Au10tixProofOfAddressUI (4.5.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSmartDocumentCaptureKit (4.2.0):
+  - Au10tixSmartDocumentCaptureKit (4.5.0):
     - Au10tixCore
     - Au10tixSourceManager
-  - Au10tixSmartDocumentCaptureUI (4.2.0):
+  - Au10tixSmartDocumentCaptureUI (4.5.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSourceManager (4.2.0):
+  - Au10tixSourceManager (4.5.0):
     - Au10tixCore
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - permission_handler_apple (9.1.1):
+  - permission_handler_apple (9.3.0):
     - Flutter
   - sdk_core_flutter (0.0.1):
-    - Au10tixBaseUI (= 4.2.0)
-    - Au10tixCore (= 4.2.0)
-    - Au10tixDetectorManager (= 4.2.0)
-    - Au10tixSourceManager (= 4.2.0)
+    - Au10tixBaseUI (= 4.5.0)
+    - Au10tixCore (= 4.5.0)
+    - Au10tixDetectorManager (= 4.5.0)
+    - Au10tixSourceManager (= 4.5.0)
     - Flutter
   - sdk_pfl_flutter (0.0.1):
-    - Au10tixPassiveFaceLivenessKit (= 4.2.0)
-    - Au10tixPassiveFaceLivenessUI (= 4.2.0)
+    - Au10tixPassiveFaceLivenessKit (= 4.5.0)
+    - Au10tixPassiveFaceLivenessUI (= 4.5.0)
     - Flutter
     - sdk_core_flutter
   - sdk_sdc_flutter (0.0.1):
-    - Au10tixProofOfAddressUI (= 4.2.0)
-    - Au10tixSmartDocumentCaptureKit (= 4.2.0)
-    - Au10tixSmartDocumentCaptureUI (= 4.2.0)
+    - Au10tixProofOfAddressUI (= 4.5.0)
+    - Au10tixSmartDocumentCaptureKit (= 4.5.0)
+    - Au10tixSmartDocumentCaptureUI (= 4.5.0)
     - Flutter
     - sdk_core_flutter
 
@@ -80,22 +80,22 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
 
 SPEC CHECKSUMS:
-  Au10tixBaseUI: d272ec216f5e01a4d60e882047748dac190c3687
-  Au10tixCore: 66778a02645f329dee03c92bd8f47c067c8d5762
-  Au10tixDetectorManager: 1c87a88b84e7c2d7809e5feffeaba6ca021d11c1
-  Au10tixPassiveFaceLivenessKit: 93aef90217824d5f12b6a461a43ff19971eef91d
-  Au10tixPassiveFaceLivenessUI: 021e2fa3de3c2dc601a35c29eef47500c7b2f28b
-  Au10tixProofOfAddressUI: d6f68790ace57f5efcee7659c5043ff30d0c0f6e
-  Au10tixSmartDocumentCaptureKit: d9ba1f478fd37677799ea6b1cc8064dc6c4d593c
-  Au10tixSmartDocumentCaptureUI: d881dea25082981c2f03b8e4580e1d11ff4c85fe
-  Au10tixSourceManager: 37975a3a58d609f7e365467ebe743b9932ecf11e
+  Au10tixBaseUI: d0e18c1114e527f7ab0d074e9de6639139c3b175
+  Au10tixCore: a27a98c84c2694d4a3cb5511fb86286372050c98
+  Au10tixDetectorManager: 01f8e963f91c1cae81096c9311b000ad9f8e65b3
+  Au10tixPassiveFaceLivenessKit: 171dff6229ee4f66189c3efb282294bd7529202a
+  Au10tixPassiveFaceLivenessUI: e19e2957f891476950191c0589996a5e7a72fb93
+  Au10tixProofOfAddressUI: 441bcb423df8518b5aa1a4f37c361b97559c577b
+  Au10tixSmartDocumentCaptureKit: 2be432d5c9b18a5a42dd0e1815e2ba38090099d5
+  Au10tixSmartDocumentCaptureUI: 9725c09c570c7838d67d76e9286c56bf1a256654
+  Au10tixSourceManager: 1f6f036605636d5a819056eafef77f20b8895aa0
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
-  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
-  sdk_core_flutter: 1435062fda2df343a23063ec7c09da992704ed99
-  sdk_pfl_flutter: 79b014720b58ec36856e58bc6f9af08ea75716cd
-  sdk_sdc_flutter: e1ef7ec6aa2cf3717840b609b55ae3785be32581
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  sdk_core_flutter: e570b14728d402fea1e9c1722d10cdb90095aad2
+  sdk_pfl_flutter: 4116f9ce41b9a47e2fe2a1ca989daea443aaeddb
+  sdk_sdc_flutter: 6b0d14a8bd55a78e08f420b40adabf515c40675b
 
 PODFILE CHECKSUM: 8f7363fb8243a2ae318e66a6dac02af26dcde14f
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

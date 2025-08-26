@@ -4,9 +4,7 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 ## Table of Contents
 
-- [flutter_au10tix_sample](#flutter_au10tix_sample)
-  - [Table of Contents](#table-of-contents)
-  - [Compatibility](#compatibility)
+- [Compatibility](#compatibility)
     - [AU10TIX SDK](#au10tix-sdk)
     - [Flutter SDK](#flutter-sdk)
   - [Project Setup](#project-setup)
@@ -34,8 +32,8 @@ A Flutter project that demonstrates how to integrate AU10TIX's Smart Document Ca
 
 The plugin is compatible with the following native AU10TIX SDK versions:
 
-- Android: 4.2.0
-- iOS: 4.2.0
+- Android: 4.5.0
+- iOS: 4.5.0
 
 ### Flutter SDK
 
@@ -61,8 +59,8 @@ If you need assistance, please contact AU10TIX support.
    dependencies:
      flutter:
        sdk: flutter
-     sdk_sdc_flutter: ^2.1.0
-     sdk_pfl_flutter: ^2.1.0
+     sdk_sdc_flutter: ^2.3.5
+     sdk_pfl_flutter: ^2.3.5
    ```
 
    SDC - <https://pub.dev/packages/sdk_sdc_flutter>
@@ -77,6 +75,16 @@ If you need assistance, please contact AU10TIX support.
       ```gradle
       key=<your_au10tix_pat>
       ```
+
+      resulting in this structure:
+      ```gradle
+      sdk.dir=
+      flutter.sdk=
+      key=
+      flutter.buildMode=
+      flutter.versionName=
+      ```     
+      
 
       The AU10TIX Android SDK will use your PAT to implement the dependencies.
 
