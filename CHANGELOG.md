@@ -1,3 +1,6 @@
+## 2.4.0
+ - Update Au10tix SDK support to 4.6.0 for Android and iOS.
+
 ## 2.3.5
  - Update Au10tix SDK support to 4.5.0 for Android and iOS.
  - Updated configurations to fit latest flutter requirements.
