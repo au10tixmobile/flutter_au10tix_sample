@@ -1,3 +1,8 @@
+## 4.7.0
+ - Updated Au10tix Flutter SDK dependencies to 4.7.0, which brings support for Au10tix SDK 4.7.0 on Android and iOS.
+ - Added NFC, Voice Consent, Video Session, and ID Thickness flows to the example app.
+ - Added Suspicious Behavior Detection toggle — enables or disables suspicious behavior analysis during PFL and SDC sessions.
+
 ## 2.4.0
  - Update Au10tix SDK support to 4.6.0 for Android and iOS.
 

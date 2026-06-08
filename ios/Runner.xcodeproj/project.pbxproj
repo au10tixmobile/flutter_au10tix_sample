@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		5479779B2F7C23230054DB8C /* Au10tix_HDUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5479778D2F7C23230054DB8C /* Au10tix_HDUIAssets.xcassets */; };
+		5479779C2F7C23230054DB8C /* montserrat-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 547977952F7C23230054DB8C /* montserrat-medium.ttf */; };
+		5479779D2F7C23230054DB8C /* Au10tix_PCUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5479778F2F7C23230054DB8C /* Au10tix_PCUIAssets.xcassets */; };
+		5479779E2F7C23230054DB8C /* Au10tix_VC_VSUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 547977932F7C23230054DB8C /* Au10tix_VC_VSUIAssets.xcassets */; };
+		5479779F2F7C23230054DB8C /* montserrat-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 547977962F7C23230054DB8C /* montserrat-regular.ttf */; };
+		547977A02F7C23230054DB8C /* Au10tix_NFCUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5479778E2F7C23230054DB8C /* Au10tix_NFCUIAssets.xcassets */; };
+		547977A12F7C23230054DB8C /* Au10tix_POAUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 547977912F7C23230054DB8C /* Au10tix_POAUIAssets.xcassets */; };
+		547977A22F7C23230054DB8C /* Au10tix_SDCUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 547977922F7C23230054DB8C /* Au10tix_SDCUIAssets.xcassets */; };
+		547977A32F7C23230054DB8C /* Au10tix_PFLUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 547977902F7C23230054DB8C /* Au10tix_PFLUIAssets.xcassets */; };
+		547977A42F7C23230054DB8C /* montserrat-semiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 547977972F7C23230054DB8C /* montserrat-semiBold.ttf */; };
+		547977A52F7C23230054DB8C /* Au10tix_BaseUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5479778C2F7C23230054DB8C /* Au10tix_BaseUIAssets.xcassets */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -34,6 +45,18 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		5479778C2F7C23230054DB8C /* Au10tix_BaseUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_BaseUIAssets.xcassets; sourceTree = "<group>"; };
+		5479778D2F7C23230054DB8C /* Au10tix_HDUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_HDUIAssets.xcassets; sourceTree = "<group>"; };
+		5479778E2F7C23230054DB8C /* Au10tix_NFCUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_NFCUIAssets.xcassets; sourceTree = "<group>"; };
+		5479778F2F7C23230054DB8C /* Au10tix_PCUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_PCUIAssets.xcassets; sourceTree = "<group>"; };
+		547977902F7C23230054DB8C /* Au10tix_PFLUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_PFLUIAssets.xcassets; sourceTree = "<group>"; };
+		547977912F7C23230054DB8C /* Au10tix_POAUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_POAUIAssets.xcassets; sourceTree = "<group>"; };
+		547977922F7C23230054DB8C /* Au10tix_SDCUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_SDCUIAssets.xcassets; sourceTree = "<group>"; };
+		547977932F7C23230054DB8C /* Au10tix_VC_VSUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Au10tix_VC_VSUIAssets.xcassets; sourceTree = "<group>"; };
+		547977952F7C23230054DB8C /* montserrat-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "montserrat-medium.ttf"; sourceTree = "<group>"; };
+		547977962F7C23230054DB8C /* montserrat-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "montserrat-regular.ttf"; sourceTree = "<group>"; };
+		547977972F7C23230054DB8C /* montserrat-semiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "montserrat-semiBold.ttf"; sourceTree = "<group>"; };
+		54AC53122FCD7036004CE135 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -61,6 +84,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		547977942F7C23230054DB8C /* Assets Catalogs */ = {
+			isa = PBXGroup;
+			children = (
+				5479778C2F7C23230054DB8C /* Au10tix_BaseUIAssets.xcassets */,
+				5479778D2F7C23230054DB8C /* Au10tix_HDUIAssets.xcassets */,
+				5479778E2F7C23230054DB8C /* Au10tix_NFCUIAssets.xcassets */,
+				5479778F2F7C23230054DB8C /* Au10tix_PCUIAssets.xcassets */,
+				547977902F7C23230054DB8C /* Au10tix_PFLUIAssets.xcassets */,
+				547977912F7C23230054DB8C /* Au10tix_POAUIAssets.xcassets */,
+				547977922F7C23230054DB8C /* Au10tix_SDCUIAssets.xcassets */,
+				547977932F7C23230054DB8C /* Au10tix_VC_VSUIAssets.xcassets */,
+			);
+			path = "Assets Catalogs";
+			sourceTree = "<group>";
+		};
+		547977982F7C23230054DB8C /* montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				547977952F7C23230054DB8C /* montserrat-medium.ttf */,
+				547977962F7C23230054DB8C /* montserrat-regular.ttf */,
+				547977972F7C23230054DB8C /* montserrat-semiBold.ttf */,
+			);
+			path = montserrat;
+			sourceTree = "<group>";
+		};
+		547977992F7C23230054DB8C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				547977982F7C23230054DB8C /* montserrat */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		5479779A2F7C23230054DB8C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				547977942F7C23230054DB8C /* Assets Catalogs */,
+				547977992F7C23230054DB8C /* fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7EF4DCCDBCD32D7C4E31B23B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +169,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				54AC53122FCD7036004CE135 /* Runner.entitlements */,
+				5479779A2F7C23230054DB8C /* Resources */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -190,6 +257,17 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				5479779B2F7C23230054DB8C /* Au10tix_HDUIAssets.xcassets in Resources */,
+				5479779C2F7C23230054DB8C /* montserrat-medium.ttf in Resources */,
+				5479779D2F7C23230054DB8C /* Au10tix_PCUIAssets.xcassets in Resources */,
+				5479779E2F7C23230054DB8C /* Au10tix_VC_VSUIAssets.xcassets in Resources */,
+				5479779F2F7C23230054DB8C /* montserrat-regular.ttf in Resources */,
+				547977A02F7C23230054DB8C /* Au10tix_NFCUIAssets.xcassets in Resources */,
+				547977A12F7C23230054DB8C /* Au10tix_POAUIAssets.xcassets in Resources */,
+				547977A22F7C23230054DB8C /* Au10tix_SDCUIAssets.xcassets in Resources */,
+				547977A32F7C23230054DB8C /* Au10tix_PFLUIAssets.xcassets in Resources */,
+				547977A42F7C23230054DB8C /* montserrat-semiBold.ttf in Resources */,
+				547977A52F7C23230054DB8C /* Au10tix_BaseUIAssets.xcassets in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
@@ -375,7 +453,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 149516;
 				DEVELOPMENT_TEAM = 553GNC732L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -385,6 +466,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.flutterAu10tixSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -504,7 +586,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 149516;
 				DEVELOPMENT_TEAM = 553GNC732L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -514,6 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.flutterAu10tixSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -527,7 +613,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 149516;
 				DEVELOPMENT_TEAM = 553GNC732L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -537,6 +626,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.flutterAu10tixSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

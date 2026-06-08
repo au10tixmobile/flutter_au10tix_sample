@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "au10tix_tutorial_illustrations.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "au10tix_tutorial_illustrations_dark.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

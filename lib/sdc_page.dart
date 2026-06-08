@@ -4,7 +4,7 @@ import 'dart:io' show File;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sdk_core_flutter/camera_view.dart';
+import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_sdc_flutter/sdk_sdc_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -46,9 +46,16 @@ class _SDCPageState extends State<SDCPage> {
   }
 
   Future<void> _startSDC() async {
+    final args = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final enableSuspiciousBehavior = args['enableSuspiciousBehavior'] as bool? ?? true;
+
     if (await Permission.camera.request().isGranted) {
       try {
-        final result = await SdkSdcFlutter.startSDC(isFrontSide: _isFrontSide);
+        final config = enableSuspiciousBehavior ? SuspiciousBehaviorConfig() : null;
+        final result = await SdkSdcFlutter.startSDC(
+          isFrontSide: _isFrontSide,
+          suspiciousBehaviorConfig: config,
+        );
         if (kDebugMode) {
           print(result.toString());
         }
@@ -155,9 +162,9 @@ class _SDCPageState extends State<SDCPage> {
 }
 
 class StatusLabel extends StatelessWidget {
-  String data;
+  final String data;
 
-  StatusLabel(this.data);
+  const StatusLabel(this.data);
 
   @override
   Widget build(BuildContext context) {

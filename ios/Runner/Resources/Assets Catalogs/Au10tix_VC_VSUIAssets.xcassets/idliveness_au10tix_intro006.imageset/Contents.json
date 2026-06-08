@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "idliveness_au10tix_intro006_light.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "idliveness_au10tix_intro006_dark.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

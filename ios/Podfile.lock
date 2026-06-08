@@ -1,101 +1,139 @@
 PODS:
-  - Au10tixBaseUI (4.6.0):
+  - Au10tixBaseUI (4.7.0):
     - Au10tixCore
-  - Au10tixCore (4.6.0)
-  - Au10tixDetectorManager (4.6.0):
+  - Au10tixCore (4.7.0)
+  - Au10tixDetectorManager (4.7.0):
     - Au10tixCore
-  - Au10tixPassiveFaceLivenessKit (4.6.0):
+  - Au10tixLocalDataInferenceKit (4.7.0):
+    - Au10tixCore
+  - Au10tixNFCPassportKit (4.7.0):
+    - Au10tixCore
+    - Au10tixSourceManager
+    - OpenSSL-Universal (~> 1.1.2300)
+  - Au10tixNFCPassportUI (4.7.0):
+    - Au10tixBaseUI
+    - Au10tixNFCPassportKit
+  - Au10tixPassiveFaceLivenessKit (4.7.0):
     - Au10tixCore
     - Au10tixDetectorManager
     - Au10tixSourceManager
-  - Au10tixPassiveFaceLivenessUI (4.6.0):
+  - Au10tixPassiveFaceLivenessUI (4.7.0):
     - Au10tixBaseUI
     - Au10tixPassiveFaceLivenessKit
-  - Au10tixProofOfAddressUI (4.6.0):
+  - Au10tixProofOfAddressUI (4.7.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSmartDocumentCaptureKit (4.6.0):
+  - Au10tixSmartDocumentCaptureKit (4.7.0):
     - Au10tixCore
     - Au10tixSourceManager
-  - Au10tixSmartDocumentCaptureUI (4.6.0):
+  - Au10tixSmartDocumentCaptureUI (4.7.0):
     - Au10tixBaseUI
     - Au10tixSmartDocumentCaptureKit
-  - Au10tixSourceManager (4.6.0):
+  - Au10tixSourceManager (4.7.0):
     - Au10tixCore
+  - Au10tixVoiceConsentUI (4.7.0):
+    - Au10tixBaseUI
+    - Au10tixCore
+    - Au10tixSourceManager
   - Flutter (1.0.0)
-  - image_picker_ios (0.0.1):
-    - Flutter
+  - OpenSSL-Universal (1.1.2301)
   - permission_handler_apple (9.3.0):
     - Flutter
   - sdk_core_flutter (0.0.1):
-    - Au10tixBaseUI (= 4.6.0)
-    - Au10tixCore (= 4.6.0)
-    - Au10tixDetectorManager (= 4.6.0)
-    - Au10tixSourceManager (= 4.6.0)
+    - Au10tixBaseUI (= 4.7.0)
+    - Au10tixCore (= 4.7.0)
+    - Au10tixDetectorManager (= 4.7.0)
+    - Au10tixSourceManager (= 4.7.0)
     - Flutter
+  - sdk_nfc_flutter (0.0.1):
+    - Au10tixNFCPassportKit (= 4.7.0)
+    - Au10tixNFCPassportUI (= 4.7.0)
+    - Flutter
+    - sdk_core_flutter
   - sdk_pfl_flutter (0.0.1):
-    - Au10tixPassiveFaceLivenessKit (= 4.6.0)
-    - Au10tixPassiveFaceLivenessUI (= 4.6.0)
+    - Au10tixPassiveFaceLivenessKit (= 4.7.0)
+    - Au10tixPassiveFaceLivenessUI (= 4.7.0)
     - Flutter
     - sdk_core_flutter
   - sdk_sdc_flutter (0.0.1):
-    - Au10tixProofOfAddressUI (= 4.6.0)
-    - Au10tixSmartDocumentCaptureKit (= 4.6.0)
-    - Au10tixSmartDocumentCaptureUI (= 4.6.0)
+    - Au10tixLocalDataInferenceKit (= 4.7.0)
+    - Au10tixProofOfAddressUI (= 4.7.0)
+    - Au10tixSmartDocumentCaptureKit (= 4.7.0)
+    - Au10tixSmartDocumentCaptureUI (= 4.7.0)
+    - Flutter
+    - sdk_core_flutter
+  - sdk_vc_flutter (2.4.0):
+    - Au10tixVoiceConsentUI (= 4.7.0)
     - Flutter
     - sdk_core_flutter
 
 DEPENDENCIES:
+  - Au10tixSmartDocumentCaptureUI (= 4.7.0)
   - Flutter (from `Flutter`)
-  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sdk_core_flutter (from `.symlinks/plugins/sdk_core_flutter/ios`)
+  - sdk_nfc_flutter (from `.symlinks/plugins/sdk_nfc_flutter/ios`)
   - sdk_pfl_flutter (from `.symlinks/plugins/sdk_pfl_flutter/ios`)
   - sdk_sdc_flutter (from `.symlinks/plugins/sdk_sdc_flutter/ios`)
+  - sdk_vc_flutter (from `.symlinks/plugins/sdk_vc_flutter/ios`)
 
 SPEC REPOS:
   https://github.com/au10tixmobile/iOS_Artifacts_cocoapods_spec.git:
     - Au10tixBaseUI
     - Au10tixCore
     - Au10tixDetectorManager
+    - Au10tixLocalDataInferenceKit
+    - Au10tixNFCPassportKit
+    - Au10tixNFCPassportUI
     - Au10tixPassiveFaceLivenessKit
     - Au10tixPassiveFaceLivenessUI
     - Au10tixProofOfAddressUI
     - Au10tixSmartDocumentCaptureKit
     - Au10tixSmartDocumentCaptureUI
     - Au10tixSourceManager
+    - Au10tixVoiceConsentUI
+  https://github.com/CocoaPods/Specs.git:
+    - OpenSSL-Universal
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  image_picker_ios:
-    :path: ".symlinks/plugins/image_picker_ios/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   sdk_core_flutter:
     :path: ".symlinks/plugins/sdk_core_flutter/ios"
+  sdk_nfc_flutter:
+    :path: ".symlinks/plugins/sdk_nfc_flutter/ios"
   sdk_pfl_flutter:
     :path: ".symlinks/plugins/sdk_pfl_flutter/ios"
   sdk_sdc_flutter:
     :path: ".symlinks/plugins/sdk_sdc_flutter/ios"
+  sdk_vc_flutter:
+    :path: ".symlinks/plugins/sdk_vc_flutter/ios"
 
 SPEC CHECKSUMS:
-  Au10tixBaseUI: bcff7cdde7606198aec89fe6e5ad9d74dee49745
-  Au10tixCore: 9e72d5421cd43148817b587a775e147149914c05
-  Au10tixDetectorManager: c56032cb5db2c41ecb3fbba8704c8d5412775b25
-  Au10tixPassiveFaceLivenessKit: 692acba8d264bcb81738861b9317664ad9f47bfc
-  Au10tixPassiveFaceLivenessUI: 453feddbc4735ae7f102c89b455b7b2a1b1903ed
-  Au10tixProofOfAddressUI: 2be5f962dbe136847c7e31de4e5c33de3372f338
-  Au10tixSmartDocumentCaptureKit: d790c52b1c26fe42b5f3239917e377e2a251b57a
-  Au10tixSmartDocumentCaptureUI: 2fd6c3de92e6dc99272f7bb6eb5d0ad24568d98e
-  Au10tixSourceManager: 57b8cd5b03ee4d4e78ce4784e83632ed60a73b66
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  Au10tixBaseUI: 18856b1619c47e1a6e3e857b1c10b11429f2bf67
+  Au10tixCore: e76680ce90a2ad66d4c9a9806f37b3f381363b2f
+  Au10tixDetectorManager: 2f4fefee2ba068a8dfbbebd9dcff860469ce7d0f
+  Au10tixLocalDataInferenceKit: 5c2da251bdbfcdaa7cc3a51034d7d943801e1ed6
+  Au10tixNFCPassportKit: 8edec607792807dd85f7c68bbf9cdab36564b5b7
+  Au10tixNFCPassportUI: d3c2d0e1e3da9a4808dcee4b4c9cd9a4d4cdc1ed
+  Au10tixPassiveFaceLivenessKit: 03219d7e384eaf8f7ef4e0a9ad6fa5c29d1798bc
+  Au10tixPassiveFaceLivenessUI: bb55e46d46422ca60d3c620d269a821f173daa19
+  Au10tixProofOfAddressUI: b409410b20c7704db272b0d0a33d68ffc4159c3c
+  Au10tixSmartDocumentCaptureKit: ede7958b52f2c2deda46d73958db4d4a7d383154
+  Au10tixSmartDocumentCaptureUI: afc65510da5adfbde03d1b4a2924e93403c772bc
+  Au10tixSourceManager: 45830684108fd11a16b6128e3a076c04f5f75213
+  Au10tixVoiceConsentUI: 3fe82841ee1c050851b706e05e34e532527c1340
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  OpenSSL-Universal: ca89c20240633a77c776082ba76b7d90f992bf77
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  sdk_core_flutter: c897eb86ba2f4720b2af8b912bb83fdbab972bf0
-  sdk_pfl_flutter: 07d204b8fe1f0c2d9d10563bf32680b4f1a21955
-  sdk_sdc_flutter: 98c2b1bc7d53dce6df88432f345a89851e05caab
+  sdk_core_flutter: c57ca9141b35a9e0e796c43bd4220838ff755a68
+  sdk_nfc_flutter: 5f146045dd9b671589aa4b0b0e348cac3a09005c
+  sdk_pfl_flutter: f257b3b78ec7dcf7e820a9dd8e094e6e7902e7e3
+  sdk_sdc_flutter: e1b4452cbae9d6f04432e8af3e22147dfc5aeffe
+  sdk_vc_flutter: 1cc92356babf789a56e0fcaa4e01e281c6d0a98d
 
-PODFILE CHECKSUM: 8f7363fb8243a2ae318e66a6dac02af26dcde14f
+PODFILE CHECKSUM: d15a5b8c5719973e230182339598fb374d8a017e
 
 COCOAPODS: 1.16.2

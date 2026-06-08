@@ -4,7 +4,7 @@ import 'dart:io' show File;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sdk_core_flutter/camera_view.dart';
+import 'package:sdk_core_flutter/sdk_core_flutter.dart';
 import 'package:sdk_pfl_flutter/sdk_pfl_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -31,10 +31,12 @@ class _PFLPageState extends State<PFLPage> {
   Future<void> _validateLiveness() async {
     try {
       _hasValidation = await SdkPflFlutter.validateLiveness();
+      if (!mounted) return;
       int passed = _hasValidation?['pfl']['status'];
       _showToast(context, _hasValidation?['pfl']['details'],
           passed == 1 ? Colors.green : Colors.red);
     } on PlatformException catch (e) {
+      if (!mounted) return;
       _showToast(context, e.details, Colors.red);
     }
   }
@@ -48,28 +50,40 @@ class _PFLPageState extends State<PFLPage> {
       ),
     );
   }
+
   void _onApproveClicked() async {
     try {
       _hasValidation = await SdkPflFlutter.validateLiveness();
+      if (!mounted) return;
       int passed = _hasValidation?['pfl']['status'];
       _showToast(context, _hasValidation?['pfl']['details'],
           passed == 1 ? Colors.green : Colors.red);
-      
+
       if (passed == 1) {
         Navigator.of(context).pop();
       }
     } on PlatformException catch (e) {
+      if (!mounted) return;
       _showToast(context, e.details, Colors.red);
     }
   }
+
   Future<void> _startPFL() async {
+    // Extract context-dependent values before any await
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final isF2F = args?['isF2F'] as bool? ?? false;
+    final enableMicrophone = args?['enableMicrophone'] as bool? ?? true;
+    final enableSuspiciousBehavior = args?['enableSuspiciousBehavior'] as bool? ?? true;
+
     if (await Permission.camera.request().isGranted) {
       try {
-        // Get isF2F from navigation arguments
-        final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-        final isF2F = args?['isF2F'] as bool? ?? false;
+        final config = enableSuspiciousBehavior ? SuspiciousBehaviorConfig() : null;
 
-        final result = await SdkPflFlutter.startPFL(isF2F: isF2F);
+        final result = await SdkPflFlutter.startPFL(
+          isF2F: isF2F,
+          enableMicrophone: enableMicrophone,
+          suspiciousBehaviorConfig: config,
+        );
         if (kDebugMode) {
           print(result.toString());
         }
@@ -101,14 +115,14 @@ class _PFLPageState extends State<PFLPage> {
             children: [
               _hasResult == null
                   ? Au10tixCameraView(
-                  featureHandlerFn: _startPFL,
-                  viewType: "au10tixCameraViewPFL")
+                      featureHandlerFn: _startPFL,
+                      viewType: "au10tixCameraViewPFL")
                   : Image.file(
-                File(_hasResult!['pfl']['imagePath']),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width / (3 / 4),
-                fit: BoxFit.fitHeight,
-              ),
+                      File(_hasResult!['pfl']['imagePath']),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width / (3 / 4),
+                      fit: BoxFit.fitHeight,
+                    ),
               StreamBuilder<String>(
                 stream: SdkPflFlutter.streamPFLUpdates()
                     .map((event) => SdkPflFlutter.getPFLTextUpdates(event)),
@@ -140,7 +154,6 @@ class _PFLPageState extends State<PFLPage> {
               ),
             ],
           ),
-
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -150,14 +163,14 @@ class _PFLPageState extends State<PFLPage> {
                   onTap: _hasResult == null
                       ? _onCaptureClick
                       : _hasResult!['pfl']['status'] == 1
-                      ? _onApproveClicked
-                      : _onRefreshClicked,
+                          ? _onApproveClicked
+                          : _onRefreshClicked,
                   child: Image.asset(
                     _hasResult == null
                         ? 'assets/images/capture_btn.png'
                         : _hasResult!['pfl']['status'] == 1
-                        ? 'assets/images/approve_btn.png'
-                        : 'assets/images/refresh_btn.png',
+                            ? 'assets/images/approve_btn.png'
+                            : 'assets/images/refresh_btn.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -175,9 +188,9 @@ class _PFLPageState extends State<PFLPage> {
     });
     _startPFL();
   }
+
   void _onBackPressed() {
     SdkPflFlutter.stopSession();
     Navigator.of(context).pop();
   }
-
 }
